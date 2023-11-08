@@ -34,7 +34,7 @@ export const Packages = () => {
             { earliestPackage && earliestPackage.availableClasses > 0 &&
                 <PackageExpiration purchasedPachage={earliestPackage} />
             }
-            <ExtraPackages packages={filteredPackages} />
+            {filteredPackages.length > 0 && <ExtraPackages packages={filteredPackages} />}
             <AvailablePackages displayType={packageDisplayType.USER} />
         </div>
     );

@@ -1,18 +1,22 @@
-const API_URL = 'http://localhost:3000/';
 import axios from 'axios';
 import { getToken } from '../../localStorage';
 import { enqueueSnackbar } from 'notistack';
 
+const getApiUrl = () => {
+    return import.meta.env.DEV ? 'https://qa-api.thestudioapp.com' : 'https://api.thestudioapp.com';
+}
+
 const instance = axios.create({
-    baseURL: 'http://localhost:3000/',
+    baseURL: getApiUrl(),
     timeout: 30000,
 });
 
 instance.interceptors.response.use((response) => response.data, (error) => {
-  console.log('error', error);
-  if(error.response.data.message || error.response.data.error) {
-    enqueueSnackbar(error.response.data.message || error.response.data.error, { variant: 'error' });
-  }
+    // console.log('error', error);
+    if(error.response.data.message || error.response.data.error) {
+      enqueueSnackbar(error.response.data.message || error.response.data.error, { variant: 'error' });
+    }
+
     if(error.response.data.message === 'User token not valid') {
       localStorage.removeItem('token');
       localStorage.removeItem('userType');

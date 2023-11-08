@@ -134,10 +134,11 @@ export const ClassDetails = () => {
                 <video className='classDetailsVideo' width='90%' autoPlay='autoPlay' controls muted>
                     <source src={video} type="video/mp4"/>
                 </video>
+                {classInfo.instructor && 
                 <UserCard user={{
-                    firstName: 'Juan',
-                    lastName: 'Perez',
-                }}/>
+                    firstName: classInfo.instructor.split(' ')[0],
+                    lastName: classInfo.instructor.split(' ')[1],
+                }}/>}
             </div>
              <div className='classDetailsRecommendations'>
                 <h3>Recomendaciones</h3>
