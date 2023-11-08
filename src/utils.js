@@ -20,7 +20,7 @@ export const daysForPackageToExpire = (packageToCalculate) => {
 export const selectEarliestPackage = (purchasedPackages) => {
     let earliestPackage = purchasedPackages[0];
     purchasedPackages.forEach((p) => {
-        if (p.expireDate < earliestPackage.expireDate) {
+        if (p.expireDate < earliestPackage.expireDate && p.availableClasses > 0) {
             earliestPackage = p;
         }
     });

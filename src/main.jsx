@@ -13,7 +13,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Provider store={store}>
       <SnackbarProvider maxSnack={1} autoHideDuration={3000}>
-        <RouterProvider router={onConstructionRouter} />
+        <RouterProvider router={router} />
       </SnackbarProvider>
     </Provider>
   </React.StrictMode>,

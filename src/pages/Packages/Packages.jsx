@@ -5,10 +5,12 @@ import { RemainingClasses } from '../../components/RemainingClasses/RemainingCla
 import { AvailablePackages, packageDisplayType } from '../AvailablePackages/AvailablePackages';
 import { PackageExpiration } from '../../components/PackageExpiration/PackageExpiration';
 import { selectEarliestPackage } from '../../utils';
+import { ExtraPackages } from '../../components/ExtraPacakges/ExtraPackages';
 
 export const Packages = () => {
     const purchasedPackages = useSelector(state => state.user.purchasedPackages);
     const [earliestPackage, setEarliestPackage] = useState(null);
+    const [filteredPackages, setFilteredPackages] = useState([]);
 
     useEffect(() => {
         document.title = 'The Studio - Paquetes';
@@ -18,6 +20,12 @@ export const Packages = () => {
         setEarliestPackage(selectEarliestPackage(purchasedPackages));
     }, [purchasedPackages]);
 
+    useEffect(() => {
+        if (earliestPackage) {
+            setFilteredPackages(purchasedPackages.filter((p) => p.expireDate !== earliestPackage.expireDate));
+        }
+    }, [earliestPackage]);
+
     
     return (
         <div className='packagesContainer'>
@@ -26,6 +34,7 @@ export const Packages = () => {
             { earliestPackage && earliestPackage.availableClasses > 0 &&
                 <PackageExpiration purchasedPachage={earliestPackage} />
             }
+            <ExtraPackages packages={filteredPackages} />
             <AvailablePackages displayType={packageDisplayType.USER} />
         </div>
     );
