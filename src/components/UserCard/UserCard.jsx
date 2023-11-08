@@ -1,12 +1,14 @@
 import './UserCard.css'
 import deleteIcon from '../../assets/Icons/delete_icon.svg'
+import selectEmpty from '../../assets/Icons/select_empty.svg'
+import selectFull from '../../assets/Icons/select_full.svg'
 import { useNavigate } from 'react-router-dom'
 
-export const UserCard = ({user, displayDeleteIcon, disableUserClick, onDeleteClick}) => {
+export const UserCard = ({user, rightIconType, displayRightIcon, disableUserClick, onIconClick}) => {
     const navigate = useNavigate();
 
     const handleCardClick = () => {
-        if(displayDeleteIcon && !disableUserClick) {
+        if(displayRightIcon && !disableUserClick) {
             navigate(`/user/${user.phoneNumber}`)        
         }
     }
@@ -16,12 +18,12 @@ export const UserCard = ({user, displayDeleteIcon, disableUserClick, onDeleteCli
             <div className='userCardClickable' onClick={handleCardClick}>
                 <p>{user.firstName} {user.lastName}</p>
             </div>
-            {displayDeleteIcon && 
+            {displayRightIcon && 
                 <img 
                     className='userCardDeleteIcon' 
-                    src={deleteIcon} 
+                    src={rightIconType === 'delete' ? deleteIcon : rightIconType === 'select' ? selectFull : selectEmpty} 
                     alt='delete icon' 
-                    onClick={() => onDeleteClick(user.phoneNumber)} 
+                    onClick={() => onIconClick(user.phoneNumber)} 
                 />}
         </div>
     );

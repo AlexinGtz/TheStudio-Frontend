@@ -7,6 +7,7 @@ import { setRegisteredUsers } from './redux/reducers/registeredUsersReducer';
 
 export const Root = (props) => {
     const user = useSelector(state => state.user);
+    const registeredUsers = useSelector(state => state.registeredUsers.users);
     const navigate = useNavigate();
     const location = useLocation();
     const dispatch = useDispatch();
@@ -17,9 +18,17 @@ export const Root = (props) => {
     }
 
     const handleGetAllUsers = async () => {
-        const res = await getRegisteredUsers();
-        dispatch(setRegisteredUsers(res));
+        if(!registeredUsers || registeredUsers.length === 0){
+            const res = await getRegisteredUsers();
+            if(res.users.length > 0) {
+                dispatch(setRegisteredUsers(res));
+            }
+        }
     }
+
+    useEffect(() => {
+        handleGetAllUsers();
+    }, [registeredUsers]);
 
     useEffect(() => {
         const userType = localStorage.getItem('userType');

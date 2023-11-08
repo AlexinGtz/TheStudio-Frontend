@@ -14,17 +14,17 @@ export const Users = () => {
     const registeredUsers = useSelector(state => state.registeredUsers.users);
 
     useEffect(() => {
-        handleGetUsers();        
+        if(!registeredUsers || registeredUsers.length === 0) {
+            handleGetUsers();        
+        }
     }, []);
 
     const handleGetUsers = async () => {
-        if(!registeredUsers || registeredUsers.length === 0) {
-            const res = await getRegisteredUsers();
-            dispatch(setRegisteredUsers({ 
-                users: res.users,
-                lastEvaluatedKey: res.lastEvaluatedKey,
-            }));
-        }
+        const res = await getRegisteredUsers();
+        dispatch(setRegisteredUsers({ 
+            users: res.users,
+            lastEvaluatedKey: res.lastEvaluatedKey,
+        }));
     }
 
     useEffect(() => {
@@ -45,7 +45,7 @@ export const Users = () => {
         <div className='usersContainer'>
             <h1>Usuarios</h1>
             <SearchBar updateFilter={setFilter} />
-            <UsersList users={filteredUsers} />
+            <UsersList users={filteredUsers} deleteEnabled />
         </div>
     );
 }

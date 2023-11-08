@@ -4,11 +4,13 @@ import { useState } from 'react';
 import { Modal } from '../Modal/Modal';
 import { deleteUser } from '../../model/api/api';
 import { enqueueSnackbar } from 'notistack';
-import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { restoreRegisteredUsers } from '../../redux/reducers/registeredUsersReducer';
 
-export const UsersList = ({users, disableUserClick}) => {
+export const UsersList = ({users, disableUserClick, externalUserClick, selectedUsers, deleteEnabled}) => {
     const [showModal, setShowModal] = useState(false);
     const [selectedUser, setSelectedUser] = useState(null);
+    const dispatch = useDispatch();
 
     if(!users) {
         return null;
@@ -18,9 +20,17 @@ export const UsersList = ({users, disableUserClick}) => {
         const res = await deleteUser(selectedUser);
         if(res.statusCode === 200) {
             enqueueSnackbar('Usuario eliminado correctamente', { variant: 'success' });
-            return;
+            dispatch(restoreRegisteredUsers());
+        } else {
+            enqueueSnackbar('Error al eliminar el usuario', { variant: 'error' });
         }
-        enqueueSnackbar('Error al eliminar el usuario', { variant: 'error' });
+        
+        setShowModal(false);
+    }
+
+    const handleUserClick = (phoneNumber) => {
+        setSelectedUser(phoneNumber);
+        setShowModal(true);
     }
 
     return (
@@ -30,17 +40,21 @@ export const UsersList = ({users, disableUserClick}) => {
                 <h3>Opciones</h3>
             </div>
             {users.length > 0 &&
-                users.map((user) => 
-                <UserCard 
-                    user={user}
-                    displayDeleteIcon 
-                    key={user.phoneNumber}
-                    onDeleteClick={(phoneNumber) => {
-                        setSelectedUser(phoneNumber);
-                        setShowModal(true);
-                    }}
-                    disableUserClick={disableUserClick}
+                users.map((user) => {
+
+                    const isSelected = selectedUsers?.includes(user.phoneNumber);
+                    const iconType = deleteEnabled ? 'delete' : isSelected ? 'select' : '';
+
+                    return (
+                    <UserCard 
+                        user={user}
+                        rightIconType={iconType}
+                        displayRightIcon 
+                        key={user.phoneNumber}
+                        onIconClick={externalUserClick ?? handleUserClick}
+                        disableUserClick={disableUserClick}
                     />)
+                })
             }
             <Modal 
                 title='Eliminar usuario?' 

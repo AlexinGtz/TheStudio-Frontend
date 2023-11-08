@@ -14,19 +14,25 @@ export const UsersModal = ({
     onConfirm,
     show,
     classInfo,
-    showAllUsers
+    showAllUsers,
+    onIconClick,
+    selectedUsers,
+    filterAlreadyBookedUsers
 }) => {
     const [filter, setFilter] = useState('');
     const [filteredUsers, setFilteredUsers] = useState([]);
     const registeredUsers = useSelector(state => state.registeredUsers.users);
 
-    const cancelClassForUser = () => {
-        alert('cancel class for user');
-    }
-
     useEffect(() => {
+        let filteredUsers = registeredUsers.filter(user => {
+            if(filterAlreadyBookedUsers) {
+                return !classInfo.registeredUsers?.some(registeredUser => registeredUser.phoneNumber === user.phoneNumber);
+            }
+            return true;
+        });
+
         if(filter) {
-            const newFilteredUsers = registeredUsers.filter(user => {
+                const newFilteredUsers = filteredUsers.filter(user => {
                 const name = user.firstName.toLowerCase();
                 const lastname = user.lastName.toLowerCase();
                 const filterLowerCase = filter.toLowerCase();
@@ -34,7 +40,7 @@ export const UsersModal = ({
             });
             setFilteredUsers(newFilteredUsers);
         } else {
-            setFilteredUsers(registeredUsers);
+            setFilteredUsers(filterAlreadyBookedUsers ? filteredUsers : registeredUsers);
         }
     }, [filter, registeredUsers]);
 
@@ -46,17 +52,26 @@ export const UsersModal = ({
         <div className='usersModalBackdrop'>
             <div className='usersModalContainer'>
                 <h2 className='usersModalTitle'>{title}</h2>
-                {   showAllUsers ?
-                    <>
-                        <SearchBar updateFilter={setFilter} altColor />
-                        <UsersList users={filteredUsers} disableUserClick />
-                    </>
-                    :
-                    classInfo?.registeredUsers &&
-                    classInfo.registeredUsers.map((user) => (
-                        <UserCard user={user} displayDeleteIcon disableUserClick onDeleteClick={cancelClassForUser} />
-                    ))
-                }
+                <div className='userModalContent'>
+                    {   showAllUsers ?
+                        <>
+                            <SearchBar updateFilter={setFilter} altColor />
+                            <UsersList users={filteredUsers} externalUserClick={onIconClick} selectedUsers={selectedUsers} disableUserClick />
+                        </>
+                        :
+                        classInfo?.registeredUsers &&
+                        classInfo.registeredUsers.map((user) => (
+                            <div className='usersModalCard'>
+                                <UserCard 
+                                    user={user} 
+                                    displayRightIcon 
+                                    rightIconType='delete' 
+                                    disableUserClick
+                                    onIconClick={onIconClick} />
+                            </div>
+                        ))
+                    }
+                </div>
                 <div className='usersModalButtons'>
                     <Button text={closeText} onClick={onClose} buttonStyle={buttonStyle.gray} />
                     <Button text={confirmText} onClick={onConfirm} />

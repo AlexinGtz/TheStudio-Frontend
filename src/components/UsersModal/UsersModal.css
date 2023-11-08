@@ -14,19 +14,26 @@
     border-radius: 10px;
     width: 80%;
     height: fit-content;
-    max-height: 40rem;
     left: 5%;
     margin: 1rem 0 0 0;
     padding: 1rem;
-    top: 30%;
+    top: 22%;
     z-index: 500;
-    overflow-y: scroll;
 }
 
 .usersModalTitle {
     font-size: 20px;
     margin: 0.5rem 0;
     text-align: center;
+}
+
+.userModalContent {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow-y: scroll;
+    max-height: 25rem;
+    padding-top: 1rem;
 }
 
 .usersModalContent {
@@ -39,4 +46,10 @@
     flex-direction: row;
     justify-content: space-between;
     width: 100%;
+}
+
+.usersModalCard {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

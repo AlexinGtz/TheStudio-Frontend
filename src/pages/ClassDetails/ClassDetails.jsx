@@ -17,6 +17,7 @@ import { useDispatch } from 'react-redux';
 import { restoreClasses } from '../../redux/reducers/classesReducer';
 import { replaceBookedClasses } from '../../redux/reducers/userReducer';
 import { UsersModal } from '../../components/UsersModal/UsersModal';
+import { enqueueSnackbar } from 'notistack';
 
 export const ClassDetails = () => {
     const classes = useSelector((state) => state.classes);
@@ -24,6 +25,8 @@ export const ClassDetails = () => {
     
     const [classInfo, setClassInfo] = useState({});
     const [showModal, setShowModal] = useState(false);
+    const [userNumber, setUserNumber] = useState('');
+    const [selectedUsers, setSelectedUsers] = useState([]);
     const [showCancelModal, setShowCancelModal] = useState(false);
     const [showBookModal, setShowBookModal] = useState(false);
     const [showClassUsersModal, setShowClassUsersModal] = useState(false);
@@ -62,14 +65,36 @@ export const ClassDetails = () => {
         handleSuceedBooking();
     }
 
-    const handleCancelClass = async () => {
-        await cancelClass(classId);
-       handleSuceedBooking();
+    const handleCancelClassConfirm = async () => {
+        await cancelClass(classId, userNumber ?? undefined);
+        handleSuceedBooking();
     }
 
-    const handleDeleteUserFromClass = async () => {
-        await cancelClass(classId);
-       handleSuceedBooking();
+    const handleBookClassForUsers = async () => {
+        const res = await bookClass({
+            classDate: classId,
+            users: selectedUsers,
+        });
+
+        if(res?.statusCode === 200) {
+            enqueueSnackbar('Clase reservada correctamente', { variant: 'success' });
+            return;
+        }
+        enqueueSnackbar('Error al reservar la clase', { variant: 'error' });
+    }
+
+    const handleDeleteIconClicked = (phoneNumber) => {
+        setShowClassUsersModal(false);
+        setShowDeleteUserFromClassModal(true);
+        setUserNumber(phoneNumber);
+    }
+
+    const handleSelectUser = (phoneNumber) => {
+        if(!selectedUsers.includes(phoneNumber)) {
+            setSelectedUsers([...selectedUsers, phoneNumber]);
+        } else {
+            setSelectedUsers(selectedUsers.filter((u) => u !== phoneNumber));
+        }
     }
 
     const handleSuceedBooking = async () => {
@@ -189,7 +214,7 @@ export const ClassDetails = () => {
                 confirmText='Si, cancelar' 
                 closeText='No' 
                 content='Sera eliminada la clase del calendario, se les notificara a los integrantes inscritos y se les devolvera como clase a favor.'
-                onConfirm={handleCancelClass}
+                onConfirm={handleCancelClassConfirm}
                 onClose={() => setShowModal(false)}
                 show={showModal} />
 
@@ -198,7 +223,7 @@ export const ClassDetails = () => {
                 confirmText='Si, cancelar' 
                 closeText='No' 
                 content='Perderas el lugar a la clase y si son menos de 24 horas, perderas la clase a favor.'
-                onConfirm={handleCancelClass}
+                onConfirm={handleCancelClassConfirm}
                 onClose={() => setShowCancelModal(false)}
                 show={showCancelModal} />
 
@@ -207,7 +232,7 @@ export const ClassDetails = () => {
                 confirmText='Si, eliminar' 
                 closeText='Cancelar' 
                 content='Se le notificara al integrante y la clase se le devolvera como clase a favor.'
-                onConfirm={handleDeleteUserFromClass}
+                onConfirm={handleCancelClassConfirm}
                 onClose={() => setShowDeleteUserFromClassModal(false)}
                 show={showDeleteUserFromClassModal} />
 
@@ -215,21 +240,28 @@ export const ClassDetails = () => {
                 title='Integrantes' 
                 closeText='Cerrar' 
                 confirmText='Agregar' 
-                onConfirm={() => setShowAllUsersModal(true)}
+                onConfirm={() => {
+                    setShowAllUsersModal(true);
+                    setShowClassUsersModal(false);
+                }}
                 onClose={() => setShowClassUsersModal(false)}
                 show={showClassUsersModal}
                 classInfo={classInfo}
+                onIconClick={handleDeleteIconClicked}
             />
 
             <UsersModal 
                 title='Integrantes' 
                 closeText='Cerrar' 
                 confirmText='Agregar' 
-                onConfirm={() => console.log('confirm')}
+                onConfirm={handleBookClassForUsers}
                 onClose={() => setShowAllUsersModal(false)}
                 show={showAllUsersModal}
                 classInfo={classInfo}
                 showAllUsers
+                onIconClick={handleSelectUser}
+                selectedUsers={selectedUsers}
+                filterAlreadyBookedUsers
             />
 
             {user.purchasedPackages && <Modal 
