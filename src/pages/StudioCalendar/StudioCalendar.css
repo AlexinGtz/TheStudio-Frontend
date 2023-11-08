@@ -1,0 +1,120 @@
+.calendarContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    background-color: white;
+    border-radius: 10px;
+    margin: 1rem 0;
+}
+
+.calendarContainer 
+    > .react-calendar__navigation {
+        margin: 1rem 0;
+}
+
+.calendarContainer 
+    > .react-calendar__navigation
+    > .react-calendar__navigation__prev2-button,
+.calendarContainer 
+    > .react-calendar__navigation
+    > .react-calendar__navigation__next2-button{
+    display: none;
+}
+
+.calendarContainer 
+    > .react-calendar__navigation
+    > .react-calendar__navigation__prev-button, 
+.calendarContainer 
+    > .react-calendar__navigation
+    > .react-calendar__navigation__next-button {
+    background-color: var(--gray-background-color);
+    border: 1px solid var(--gray-background-color);
+    width: 2rem;
+    height: 2rem;
+}
+
+.calendarContainer
+    > .react-calendar__viewContainer
+    > .react-calendar__month-view
+    > div
+    > div 
+    > .react-calendar__month-view__weekdays {
+        text-align: center;
+}
+
+.calendarContainer
+    > .react-calendar__viewContainer
+    > .react-calendar__month-view
+    > div
+    > div 
+    > .react-calendar__month-view__weekdays
+    > .react-calendar__month-view__weekdays__weekday
+    > abbr {
+        text-decoration: none;
+}
+
+.calendarContainer 
+    > .react-calendar__navigation
+    > .react-calendar__navigation__arrow {
+    font-size: large;
+}
+
+.calendarContainer 
+    > .react-calendar__navigation
+    > .react-calendar__navigation__label {
+    background-color: var(--gray-background-color);
+    border: 1px solid var(--gray-background-color);
+    width: fit-content;
+    height: 2rem;
+    color: black;
+    font-family: 'montserrat';
+}
+
+.calendarTile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 4rem;
+    background-color: white;
+    outline: none;
+    border: none;
+}
+
+.calendarContent {
+    border-radius: 30px;
+    height: 0.5rem;
+    width: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.calendarContentMainColor {
+    background-color: var(--main-color);
+}
+
+.calendarContentGray {
+    background-color: var(--dark-gray);
+}
+
+.calendarSelect {
+    background-color: white;
+    border: none;
+    border-radius: 10px;
+    color: black;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    margin: 1rem 0;
+    font-family: 'montserrat';
+}
+
+.calendarSelect > option {
+    background-color: white;
+    border: none;
+    border-radius: 10px;
+    color: black;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    margin: 1rem 0;
+}

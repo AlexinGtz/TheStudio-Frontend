@@ -23,9 +23,7 @@ export const EditPackage = () => {
     if(!selectedPackage) return <h1>Loading...</h1>
 
     const handleSaveChanges = async () => {
-        console.log('selectedPackage', selectedPackage);
         const res = await editPackageInfo(selectedPackage);
-        console.log('res', res);
         if(res.statusCode === 200) {
             dispatch(restorePackages());
             enqueueSnackbar('Paquete editado correctamente', { variant: 'success' });  

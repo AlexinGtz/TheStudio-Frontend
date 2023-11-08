@@ -4,7 +4,6 @@ import { Root } from "../Root";
 import { UserMainPage } from "../pages/UserMainPAge/UserMainPage";
 import { Banner } from "../components/Banner/Banner";
 import { MenuBar } from "../components/MenuBar/MenuBar";
-import { Calendar } from "../pages/Calendar/Calendar";
 import { Packages } from "../pages/Packages/Packages";
 import { Profile } from "../pages/Profile/Profile";
 import { Users } from "../pages/Users/Users";
@@ -17,6 +16,7 @@ import { UserDetails } from "../pages/UserDetails/UserDetail";
 import { AssignPackage } from "../pages/AssignPackage/AssignPackage";
 import { UpdatePassword } from "../pages/UpdatePassword/UpdatePassword";
 import { EditPackage } from "../pages/EditPackage/EditPackage";
+import { StudioCalendar } from "../pages/StudioCalendar/StudioCalendar";
 
 export const router = createBrowserRouter([
     {
@@ -77,7 +77,7 @@ export const router = createBrowserRouter([
               path: "/calendar",
               element: (
                 <>
-                    <Calendar />
+                    <StudioCalendar />
                 </>
                 ),
             },
