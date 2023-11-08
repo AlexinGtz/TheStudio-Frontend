@@ -1,0 +1,25 @@
+.loginLogo {
+    font-family: 'yeseva-one';
+}
+
+.loginInputs {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+}
+
+.loginContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    background-color: var(--accent-color);
+}
+
+.loginForgotPassword {
+    margin-bottom: 4rem;
+}

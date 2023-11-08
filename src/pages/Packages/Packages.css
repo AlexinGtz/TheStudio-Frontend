@@ -1,0 +1,90 @@
+.packagesContainer {
+    flex-direction: column;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.packagesContainer > h1 {
+    align-self: flex-start;
+    width: 90%;
+    padding-left: 1.5rem;
+}
+
+.packagesLatest {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 10px;
+    width: 90%;
+    justify-content: center;
+    align-items: center;
+}
+
+.packagesLatest > h2 {
+    margin: 1rem 0 0.2rem 0;
+    font-size: 18px;
+}
+
+.packagesLatest > p {
+    margin: 0 0 1rem 0;
+}
+
+.packagesLatestRemaining {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 50%;
+}
+
+.packageLatestRemainingNumber {
+    background-color: var(--main-color);
+    width: 2rem;
+    height: 2rem;
+    color: white;
+    text-align: center;
+    border-radius: 10px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.packageLatestRemainingNumber > p {
+    font-size: 14px;
+    margin: 0;
+    font-weight: bold;
+}
+
+.packagesAvailable {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    justify-content: center;
+    align-items: center;
+}
+
+.packageAvailable {
+    display: flex;
+    flex-direction: column;
+    margin: 0.5rem 0;
+    background-color: white;
+    border-radius: 10px;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.packageAvailable > h2 {
+    font-size: 16px;
+    margin: 1rem 0 0.2rem 0;
+}
+
+.packageAvailable > p {
+    margin: 0.3rem 0;
+}
+
+.packageExpire {
+    margin-bottom: 1rem !important;
+}

@@ -1,0 +1,21 @@
+.registerLogo {
+    font-family: 'yeseva-one';
+}
+
+.registerInputs {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+}
+
+.registerContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    background-color: var(--accent-color);
+}

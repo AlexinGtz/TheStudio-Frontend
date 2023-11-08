@@ -1,0 +1,126 @@
+.classDetailsContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.classDetailsGoBack {
+    margin-top: 2rem;
+    width: 100%;
+}
+
+.classDetailsButton {
+    width: 6rem;
+    height: 2rem;
+    font-weight: bold;
+}
+
+.classDetailsDateString {
+    margin: 1rem 0 0 0;
+    justify-self: flex-start;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.classDetailsDateContainer {
+    width: 90%;
+    margin: 0;
+}
+
+.classDetailsVideoContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    border-radius: 10px;
+    width: 90%;
+    margin: 1rem 0 0 0;
+}
+
+.classDetailsVideo {
+    width: 90%;
+    border-radius: 10px;
+    align-self: center;
+    margin-top: 1rem;
+}
+
+.classDetailsHour {
+    display: flex;
+    width: 88%;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.classDetailsTime {
+    display: flex;
+}
+
+.classDetailsTimeText {
+    font-size: 12px;
+    margin-left: 0.3rem;
+    font-weight: bold;
+}
+
+.classDetailsCalories {
+    display: flex;
+}
+
+.classDetailsRecommendations {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    margin-top: 1rem;
+    background-color: white;
+    border-radius: 10px;
+    margin-bottom: 0.5rem;
+}
+
+.classDetailsRecommendations > h3 {
+    padding-left: 1rem;
+    margin: 1rem 0 0 0;
+    font-weight: 200;
+}
+
+.classDetailsBalance {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 80%;
+    background-color: white;
+    padding: 1rem;
+    margin: 0.5rem 1rem;
+    border-radius: 10px;
+    align-items: center;
+}
+
+.classDetailsBalance > p {
+    font-size: 18px;
+}
+
+.classDetailsNumber {
+    width: 4rem;
+    height: 3rem;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    display: flex;
+    background-color: var(--gray-background-color);
+}
+
+.classDetailsNumber > p {
+    margin: 0;
+}
+
+.classDetailsAdminButtons {
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+}
+
+.classDetailsRegisterButton {
+    width: 60%;
+    height: 2.5rem;
+}

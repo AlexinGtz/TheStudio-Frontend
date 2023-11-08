@@ -1,0 +1,12 @@
+.errorPageContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 60vh;
+}
+
+.errorPageButton {
+    margin-top: 3rem;
+    width: 70%;
+}

@@ -1,0 +1,35 @@
+.userMainPageContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.userMainPageTexts{
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+}
+
+.userMainPageClasses {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.userMainPageTexts > h1 {
+    display: flex;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 2rem 0 0 0;
+    width: 100%;
+}
+
+.userMainPageTexts > h3 {
+    display: flex;
+    font-size: 0.8rem;
+    font-weight: bold;
+    margin: 0.3rem 0 1rem 0;
+    width: 100%;
+}

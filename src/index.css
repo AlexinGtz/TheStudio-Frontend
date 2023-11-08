@@ -1,0 +1,37 @@
+:root {
+    --main-color: #CBB6A2;
+    --accent-color: #F5F0EC;
+    --text-color: #424242;
+    --beige-background-color: #F5F0EC;
+    --gray-background-color: #F5F5F5;
+    --dark-gray: #9F9F9F;
+    --small-text: 20px;
+    --medium-text: 28px;
+    --large-text: 36px;
+    --x-large-text: 48px;
+}
+
+body {
+    background-color: var(--gray-background-color);
+    font-family: "montserrat";
+    margin: 0;
+}
+
+html, body, #root {
+  width: 100%;
+  height: 100%;
+}
+
+@font-face {
+    font-family: "montserrat";
+    src: local("montserrat"),
+      url("./assets/fonts/montserrat.ttf") format("truetype");
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: "yeseva-one";
+    src: local("yeseva-one"),
+      url("./assets/fonts/yeseva-one.ttf") format("truetype");
+    font-weight: normal;
+}

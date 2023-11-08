@@ -1,0 +1,42 @@
+.userDetailsContainer {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 1rem;
+}
+
+.userDetailsInfoContainer {
+    background-color: white;
+    border-radius: 10px;
+    width: 90%;
+    margin: 0.5rem 0;
+}
+
+.userDetailsInfoTitle {
+    margin: 0.5rem 0;
+    padding-left: 1rem;
+    color: var(--dark-gray);
+    font-size: 14px;
+}
+
+.userDetailsInfoContent {
+    margin: 0.5rem 0;
+    padding-left: 1rem;
+}
+
+.userDetailsGoBack {
+    margin-top: 1rem;
+    width: 100%;
+}
+
+.userDetailsButton {
+    width: 6rem;
+    font-weight: bold;
+    margin-left: 2rem;
+    height: 2rem;
+}
+
+.userDetailsAssignButton {
+    margin-top: 1rem;
+    width: 90%;
+}

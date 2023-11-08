@@ -1,0 +1,75 @@
+.classCardContainer {
+    width: 90%;
+}
+
+.classCardDate {
+    font-size: 12px;
+    margin-left: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.classCardInfo {
+    background-color: white;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    padding: 0 1rem;
+}
+
+.classCardHour {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.classCardTime {
+    display: flex;
+}
+
+.classCardCalories {
+    display: flex;
+}
+
+.classCardTeacherInfo {
+    display: flex;
+    flex-direction: row;
+    margin: 0 0 1rem 0;
+}
+
+.classCardTeacheImage {
+    display: flex;
+    width: 4rem;
+}
+
+.classCardTeacherName {
+    display: flex;
+    flex-direction: column;
+}
+
+.classCardTeacherName > p {
+    margin: 0.1rem;
+    font-size: 14px;
+}
+
+.classCardTimeText {
+    font-size: 12px;
+    margin-left: 0.3rem;
+}
+
+.classCardBooked {
+    width: 100%;
+    border-radius: 5px;
+    background-color: var(--main-color);
+    color: white;
+    align-items: center;
+    height: 1.5rem;
+    margin-bottom: 0.5rem;
+    font-size: 12px;
+    display: flex;
+    justify-content: center;
+}
+
+.classCardBooked > img {
+    width: 1rem;
+    margin-right: 0.3rem;
+}

@@ -1,0 +1,24 @@
+.editPackageContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 80%;
+}
+
+.editPackageButtons {
+    width: 90%;
+}
+
+.editPackageButtonsContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.editPackageInputs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

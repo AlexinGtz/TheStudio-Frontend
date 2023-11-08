@@ -1,0 +1,29 @@
+.Logo {
+    font-family: 'yeseva-one';
+    display: flex;
+    align-items: center;
+    color: var(--main-color);
+    margin: 2rem 0;
+}
+
+.Logo > h1 {
+    margin: 0;
+}
+
+.Logo > h2 {
+    margin: 0;
+}
+
+.logoVertical {
+    flex-direction: column;
+}
+
+.logoHorizontal {
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: center;
+}
+
+.logoHorizontal > h2 {
+    margin-left: 0.5rem;
+}

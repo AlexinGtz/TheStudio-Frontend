@@ -1,0 +1,29 @@
+.inputPackageContainer {
+    background-color: white;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 80%;
+    margin: 0.7rem 0;
+}
+
+.inputPackageContainer > h3 {
+    margin-left: 1rem;
+    font-size: 18px;
+}
+
+.inputPackageInput {
+    background-color: var(--gray-background-color);
+    border: none;
+    border-radius: 10px;
+    width: 15%;
+    height: 3rem;
+    margin-right: 1rem;
+    text-align: center;
+}
+
+.inputPackageInput:focus {
+    outline: none;
+}

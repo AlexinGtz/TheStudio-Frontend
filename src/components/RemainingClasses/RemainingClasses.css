@@ -1,0 +1,43 @@
+.remainingClassesContainer {
+    width: 90%;
+    background-color: white;
+    margin: 1rem;
+    border-radius: 10px;
+}
+
+.remainingClassesBalance {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 1rem;
+    width: 90%;
+}
+
+.remainingClassesBalance > p {
+    font-size: 18px;
+}
+
+.remainingClassesNumber {
+    width: 4rem;
+    height: 3rem;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    display: flex;
+}
+
+.remainingClassesNumber {
+    font-size: 18px;
+    margin: 0;
+}
+
+.remainingClassesMainColor {
+    background-color: var(--main-color);
+    color: white;
+}
+
+.remainingClassesGray {
+    background-color: var(--gray-background-color);
+    color: black;
+}

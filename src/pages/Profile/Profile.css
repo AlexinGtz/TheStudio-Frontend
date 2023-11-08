@@ -1,0 +1,20 @@
+.profileContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    justify-self: center;
+    align-self: center;
+    width: 100%;
+}
+
+.profileCentered {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profileLogoutButton {
+    width: 90%;
+}

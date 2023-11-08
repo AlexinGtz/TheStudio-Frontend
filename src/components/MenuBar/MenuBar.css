@@ -1,0 +1,11 @@
+.menuBarContainer {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    background-color: white;
+    position: fixed;
+    bottom: 0;
+    align-items: center;
+    height: 5rem;
+}

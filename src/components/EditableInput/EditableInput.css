@@ -1,0 +1,42 @@
+.editableInputContainer {
+    display: flex;
+    flex-direction: row;
+    background-color: white;
+    width: 90%;
+    align-items: center;
+    margin: 0.5rem 0;
+    border-radius: 10px;
+}
+
+.editableInputInfo {
+    flex: 6;
+    margin: 0.2rem 1rem;
+}
+
+.editableInputIcon {
+    flex: 1;
+}
+
+.editableInputTitle {
+    color: var(--dark-gray);
+    margin: 0.5rem 0;
+}
+
+.editableInputDisabled {
+    user-select: none;  
+    pointer-events: none;  
+}
+
+.editableInputData {
+    height: 1rem;
+    font-size: 20px;
+    color: black;
+    border: none;
+    outline: none;
+    margin: 0.5rem 0;
+}
+
+.editableInputData:focus {
+    border: none;
+    outline: none;
+}

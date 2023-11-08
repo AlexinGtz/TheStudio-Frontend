@@ -1,0 +1,22 @@
+.searchBoxContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 2rem;
+}
+
+.searchBoxInput {
+    width: 80%;
+    height: 80%;
+    border-radius: 10px;
+    padding: 0.5rem;
+    font-size: 1rem;
+    outline: none;
+    color: black;
+}
+
+.searchBoxGray {
+    background-color: var(--gray-background-color);
+}

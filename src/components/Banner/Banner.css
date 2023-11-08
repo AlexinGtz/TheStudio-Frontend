@@ -1,0 +1,19 @@
+.banner { 
+    background-color: var(--main-color);
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.banner > .logoHorizontal {
+    color: white;
+    margin: 0;
+    font-size: 9px;
+    font-weight: 100;
+}
+
+.banner > .logoHorizontal > h1,
+.banner > .logoHorizontal > h2 {
+    font-weight: 100;
+}
