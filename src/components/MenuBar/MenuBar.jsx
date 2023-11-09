@@ -1,6 +1,6 @@
+import './MenuBar.css'
 import { useSelector } from 'react-redux';
 import { userTypes } from '../../constants';
-import './MenuBar.css'
 import { MenuItem } from '../MenuItem/MenuItem';
 
 const menuItems = [

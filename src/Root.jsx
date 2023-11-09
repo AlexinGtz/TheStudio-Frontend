@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getUserProfile, getRegisteredUsers } from './model/api/api';
 import { setProfile } from './redux/reducers/userReducer';
 import { setRegisteredUsers } from './redux/reducers/registeredUsersReducer';
+import { userTypes } from './constants';
 
 export const Root = (props) => {
     const user = useSelector(state => state.user);
@@ -18,7 +19,7 @@ export const Root = (props) => {
     }
 
     const handleGetAllUsers = async () => {
-        if(localStorage.getItem('token')) {
+        if(localStorage.getItem('token') && user.userType === userTypes.ADMIN) {
             if(!registeredUsers || registeredUsers.length === 0){
                 const res = await getRegisteredUsers();
                 if(res.users.length > 0) {

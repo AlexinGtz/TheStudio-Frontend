@@ -1,9 +1,7 @@
-import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
 import './UserMainPage.css'
-import { getUserBookedClasses, getUserProfile } from '../../model/api/api';
+import { useEffect, useState } from 'react';
+import { getUserBookedClasses } from '../../model/api/api';
 import { ClassCard } from '../../components/ClassCard/ClassCard';
-import { setProfile } from '../../redux/reducers/userReducer';
 
 export const UserMainPage = () => {
     const [classes, setClasses] = useState([]);
@@ -14,7 +12,7 @@ export const UserMainPage = () => {
 
     const handleGetClasses = async () => {
         const res = await getUserBookedClasses();
-        setClasses(res.classes);
+        setClasses(res.classes.sort((a, b) => a.date > b.date ? 1 : -1));
     }
 
     return (

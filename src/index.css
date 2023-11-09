@@ -22,6 +22,10 @@ html, body, #root {
   height: 100%;
 }
 
+h1, h2, h3, p {
+  user-select: none;
+}
+
 @font-face {
     font-family: "montserrat";
     src: local("montserrat"),

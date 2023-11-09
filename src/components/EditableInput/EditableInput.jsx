@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { enqueueSnackbar } from 'notistack';
 import { editUserData } from '../../model/api/api';
 import { useSelector, useDispatch } from 'react-redux';
-import { replaceUserInfo, restoreProfile } from '../../redux/reducers/userReducer';
+import { replaceUserInfo } from '../../redux/reducers/userReducer';
 
 export const EditableInput = ({id, title, data, updateData, formatter, extraStepLink, showIcon}) => {
     const [editMode, setEditMode] = useState(false);

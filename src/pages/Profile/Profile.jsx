@@ -1,6 +1,6 @@
 import './Profile.css'
-import { useEffect, useState } from 'react';
 import userIcon from '../../assets/Icons/user_icon.svg'
+import { useEffect, useState } from 'react';
 import { EditableInput } from '../../components/EditableInput/EditableInput';
 import { useSelector } from 'react-redux';
 import { RemainingClasses } from '../../components/RemainingClasses/RemainingClasses';

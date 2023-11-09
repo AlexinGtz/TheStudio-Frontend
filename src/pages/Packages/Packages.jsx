@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react';
 import './Packages.css'
 import { useSelector } from 'react-redux';
-import { RemainingClasses } from '../../components/RemainingClasses/RemainingClasses';
-import { AvailablePackages, packageDisplayType } from '../AvailablePackages/AvailablePackages';
-import { PackageExpiration } from '../../components/PackageExpiration/PackageExpiration';
+import { useEffect, useState } from 'react';
 import { selectEarliestPackage } from '../../utils';
 import { ExtraPackages } from '../../components/ExtraPacakges/ExtraPackages';
+import { RemainingClasses } from '../../components/RemainingClasses/RemainingClasses';
+import { PackageExpiration } from '../../components/PackageExpiration/PackageExpiration';
+import { AvailablePackages, packageDisplayType } from '../AvailablePackages/AvailablePackages';
 
 export const Packages = () => {
     const purchasedPackages = useSelector(state => state.user.purchasedPackages);
@@ -22,10 +22,9 @@ export const Packages = () => {
 
     useEffect(() => {
         if (earliestPackage) {
-            setFilteredPackages(purchasedPackages.filter((p) => p.expireDate !== earliestPackage.expireDate));
+            setFilteredPackages(purchasedPackages.filter((p) => (p.expireDate !== earliestPackage.expireDate && p.availableClasses > 0)));
         }
     }, [earliestPackage]);
-
     
     return (
         <div className='packagesContainer'>

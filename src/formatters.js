@@ -9,10 +9,10 @@ export const formatPhoneNumber = (phoneNumber) => {
         regex = /(\d{2})/;
         formattedNumber = '($1)';
     } else if(phoneNumber.length > 2 && phoneNumber.length <= 6) {
-        regex = /(\d{2})(\d{4,})/;
+        regex = /(\d{2})(\d{1,})/;
         formattedNumber = '($1)-$2';
     } else {
-        regex = /(\d{2})(\d{4})(\d{4})/;
+        regex = /(\d{2})(\d{4})(\d{1,})/;
         formattedNumber = '($1)-$2-$3';
     }
         

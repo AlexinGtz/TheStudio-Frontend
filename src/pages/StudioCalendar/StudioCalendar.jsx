@@ -1,11 +1,11 @@
+import './StudioCalendar.css'
+import moment from 'moment/moment';
+import Calendar from 'react-calendar';
 import { getUpcomingClasses } from '../../model/api/api';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ClassCard } from '../../components/ClassCard/ClassCard';
-import './StudioCalendar.css'
 import { setClasses } from '../../redux/reducers/classesReducer';
-import Calendar from 'react-calendar';
-import moment from 'moment/moment';
 import { userTypes } from '../../constants';
 
 export const StudioCalendar = () => {
@@ -44,7 +44,7 @@ export const StudioCalendar = () => {
         dispatch(setClasses(res.classes));
     }
 
-    const handleClickDay = (value, event) => {
+    const handleClickDay = (value) => {
         setSelectedDate((new Date(value)).toISOString());
         setCalendarType('week');
     }
@@ -134,7 +134,7 @@ export const StudioCalendar = () => {
                 {   filteredClasses?.length > 0 ? 
                     filteredClasses.map((c) => <ClassCard key={c.date} class={c} markBookedClasses /> )
                     :
-                    <h3>No hay clases disponibles para ese dia</h3>
+                    <h3>No hay clases disponibles para ese día</h3>
                 }
                 </div>
             }

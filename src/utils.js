@@ -18,7 +18,8 @@ export const daysForPackageToExpire = (packageToCalculate) => {
 }
 
 export const selectEarliestPackage = (purchasedPackages) => {
-    let earliestPackage = purchasedPackages[0];
+    const filteredPackages = purchasedPackages.filter((p) => p.availableClasses > 0);
+    let earliestPackage = filteredPackages[0];
     purchasedPackages.forEach((p) => {
         if (p.expireDate < earliestPackage.expireDate && p.availableClasses > 0) {
             earliestPackage = p;

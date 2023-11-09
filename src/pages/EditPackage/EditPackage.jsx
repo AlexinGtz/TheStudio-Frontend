@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
 import './EditPackage.css'
+import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { InputPackage } from '../../components/InputPackage/InputPackage';
 import { useParams } from 'react-router-dom';
@@ -20,7 +20,7 @@ export const EditPackage = () => {
         setSelectedPackage(allPackages.data.find(p => p.id === packageId));
     }, [allPackages]);
 
-    if(!selectedPackage) return <h1>Loading...</h1>
+    if(!selectedPackage) return <h1>Cargando...</h1>
 
     const handleSaveChanges = async () => {
         const res = await editPackageInfo(selectedPackage);
@@ -48,7 +48,7 @@ export const EditPackage = () => {
                     setQuantity={cost => setSelectedPackage({...selectedPackage, cost: cost})}
                     />
                 <InputPackage 
-                    title='Dias de vigencia' 
+                    title='Días de vigencia' 
                     quantity={selectedPackage.expireDays} 
                     setQuantity={expireDays => setSelectedPackage({...selectedPackage, expireDays: expireDays})}
                     />

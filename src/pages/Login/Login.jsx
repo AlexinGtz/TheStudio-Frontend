@@ -1,10 +1,10 @@
+import './Login.css'
 import { Button } from '../../components/Button/Button';
 import { Input } from '../../components/Input/Input';
 import { Logo } from '../../components/Logo/Logo';
 import { PasswordInput } from '../../components/PasswordInput/PasswordInput';
 import { login } from '../../model/api/api';
 import { useState } from 'react';
-import './Login.css'
 import { loginAction } from '../../redux/reducers/loginReducer';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -18,14 +18,28 @@ export const Login = () => {
     const navigate = useNavigate();
 
     const handleLogin = async () => {
-        const response = await login(phoneNumber, password);
-        if(!response) return alert('Usuario o contraseña incorrectos');
+        const formattedNumber = phoneNumber.replace(/\D/g, '');
+        const response = await login(formattedNumber, password);
+        if(!response){
+            return;
+        };
         dispatch(loginAction(response));
         if(response.userType === 'admin') {
             navigate('/calendar');
             return;
         } 
-        else navigate('/');    
+        else navigate('/');
+    }
+
+    const handleNumberFormatting = (e) => {
+        let phone = e.target.value;
+        if(e.target.value.length === 5 && phoneNumber.length >= 5) {
+            phone = e.target.value.slice(1,3);
+        }
+        if(e.target.value.length === 3 && phoneNumber.length < 3) {
+            phone = e.target.value.slice(1,2);
+        }
+        setPhoneNumber(phone);
     }
 
     const handleRegister = () => {
@@ -36,19 +50,19 @@ export const Login = () => {
         navigate('/forgotPassword');
     }
 
+    const formattedPhoneNumber = formatPhoneNumber(phoneNumber);
+
     return (
         <div className='loginContainer'>
             <Logo vertical={true} />
             <div className='loginInputs'>
                 <Input 
-                    placeholder='Numero de telefono' 
+                    placeholder='Número de teléfono' 
                     type='text'
                     id='phoneNumber'
-                    value={phoneNumber} 
-                    formatter={formatPhoneNumber}
-                    onChange={(e) => { 
-                        setPhoneNumber(e.target.value)
-                     }} />
+                    value={formattedPhoneNumber}
+                    maxLength={14}
+                    onChange={handleNumberFormatting} />
                 <PasswordInput 
                     placeholder='Contraseña' 
                     id='password'

@@ -21,15 +21,15 @@ export const AssignPackage = () => {
         await addPackageToUser(userPhoneNumber, selectedPackage.id);
         navigate(`/user/${userPhoneNumber}`)
     }
-
+    //TODO: Cambiar nombre de usuario y vigencia
     return (
         <div>
             <AvailablePackages displayType={packageDisplayType.ADMIN_ADD} onButtonClick={handleButtonClick} />
             <Modal 
-                title='Asignar paquete?' 
-                confirmText='Si, asignar' 
+                title='¿Asignar paquete?' 
+                confirmText='Sí, asignar' 
                 closeText='Cancelar' 
-                content='Adriana tendra una clase a favor con una vigencia de 7 dias'
+                content='Adriana tendra una clase a favor con una vigencia de 7 días'
                 onConfirm={handleAssignPackage}
                 onClose={() => {
                     setShowModal(false)

@@ -78,7 +78,7 @@ export const AvailablePackages = ({displayType, onButtonClick}) => {
                         <div className='packageAvailable' key={packageAvailable.classQuantity}>
                             <h2>{packageAvailable.classQuantity} {packageAvailable.classQuantity > 1 ? 'Clases' : 'Clase'}</h2>
                             <p>${packageAvailable.cost}</p>
-                            <p className='packageExpire'>Vigencia de {packageAvailable.expireDays} dias</p>
+                            <p className='packageExpire'>Vigencia de {packageAvailable.expireDays} días</p>
                             {showButtonTypes.includes(displayType)  && 
                                 <>
                                     <Button 

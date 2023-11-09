@@ -1,5 +1,5 @@
-import { Input } from '../Input/Input';
 import './SearchBar.css'
+import { Input } from '../Input/Input';
 
 export const SearchBar = (props) => {
 

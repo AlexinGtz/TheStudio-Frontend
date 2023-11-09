@@ -44,7 +44,7 @@ export const Register = () => {
             password
         });
         if(!response) return alert('Ha ocurrido un error al registrarse');
-        alert('Usuario registrado correctamente');
+        enqueueSnackbar('Usuario registrado correctamente', { variant: 'success' });
         navigate('/login');
     }
 
@@ -70,7 +70,7 @@ export const Register = () => {
                         setLastName(e.target.value)
                      }} />
                 <Input 
-                    placeholder='Numero de telefono' 
+                    placeholder='Número de teléfono' 
                     type='text' 
                     value={phoneNumber} 
                     formatter={formatPhoneNumber}

@@ -1,5 +1,5 @@
-import { Button, buttonStyle } from '../Button/Button';
 import './Modal.css'
+import { Button, buttonStyle } from '../Button/Button';
 
 export const Modal = ({
     title,

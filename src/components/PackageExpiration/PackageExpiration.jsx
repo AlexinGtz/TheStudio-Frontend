@@ -3,7 +3,7 @@ import {daysForPackageToExpire} from '../../utils';
 
 export const PackageExpiration = ({purchasedPachage, admin, altColor}) => {
 
-    const title = admin ? 'Paquete actual.' : altColor ? '' : 'Paquete mas proximo a vencer';
+    const title = admin ? 'Paquete actual.' : altColor ? '' : 'Paquete más próximo a vencer';
     const containerClass = altColor ? 'packageExpirationLatest' : 'packagesLatest';
 
     return (
@@ -17,7 +17,7 @@ export const PackageExpiration = ({purchasedPachage, admin, altColor}) => {
                             <p>{purchasedPachage.availableClasses}</p>
                         </div>
                     </div>
-                    <p>Caduca en {daysForPackageToExpire(purchasedPachage)} dias</p>
+                    <p>Caduca en {daysForPackageToExpire(purchasedPachage)} días</p>
                 </div>
             </>
     );

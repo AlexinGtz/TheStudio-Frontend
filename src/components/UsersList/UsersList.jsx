@@ -57,10 +57,10 @@ export const UsersList = ({users, disableUserClick, externalUserClick, selectedU
                 })
             }
             <Modal 
-                title='Eliminar usuario?' 
-                confirmText='Si, eliminar' 
+                title='¿Eliminar usuario?' 
+                confirmText='Sí, eliminar' 
                 closeText='Cancelar' 
-                content='No tendra acceso a la aplicacion y sus datos seran eliminados.'
+                content='No tendrá acceso a la aplicación y sus datos seran eliminados.'
                 onConfirm={handleDeleteClick}
                 onClose={() => {
                     setShowModal(false)

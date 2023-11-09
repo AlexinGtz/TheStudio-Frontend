@@ -1,6 +1,6 @@
+import './Users.css'
 import { useEffect, useState } from 'react';
 import { SearchBar } from '../../components/SearchBar/SearchBar';
-import './Users.css'
 import { useSelector } from 'react-redux';
 import { getRegisteredUsers } from '../../model/api/api';
 import { useDispatch } from 'react-redux';

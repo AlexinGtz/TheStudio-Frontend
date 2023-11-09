@@ -1,13 +1,13 @@
-import { useEffect, useState } from 'react';
 import './ClassDetails.css'
-import { useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import flame from '../../assets/Icons/flame_outline.svg'
 import time from '../../assets/Icons/time_outline.svg'
-import { bookClass, cancelClass, getClassInfo, getUserClasses } from '../../model/api/api';
 import video from '../../assets/Videos/pilates.mp4';
-import { UserCard } from '../../components/UserCard/UserCard';
 import rightArrow from '../../assets/Icons/right_arrow.svg';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { bookClass, cancelClass, getClassInfo, getUserClasses } from '../../model/api/api';
+import { UserCard } from '../../components/UserCard/UserCard';
 import { Button, buttonStyle } from '../../components/Button/Button';
 import { Modal } from '../../components/Modal/Modal';
 import { userTypes } from '../../constants';
@@ -50,8 +50,6 @@ export const ClassDetails = () => {
         if(!classInfo) return;
         setClassAlreadyBooked(classInfo.registeredUsers?.find((u) => u.phoneNumber === user.phoneNumber));
     }, [classInfo]);
-
-    
 
     const handleGetClassInformation = async () => {
         const res = await getClassInfo(classId);
@@ -140,7 +138,7 @@ export const ClassDetails = () => {
     return (
         <div className='classDetailsContainer'>
             <div className='classDetailsGoBack'>
-                <Button className='classDetailsButton' text='Atras' onClick={goBack} />        
+                <Button className='classDetailsButton' text='Atrás' onClick={goBack} />        
             </div>
             <div className='classDetailsDateContainer'>
                 <p className='classDetailsDateString'>{classDateString}</p>
@@ -157,7 +155,7 @@ export const ClassDetails = () => {
             </div>
             <div className='classDetailsVideoContainer'>
                 <video className='classDetailsVideo' width='90%' autoPlay='autoPlay' controls muted>
-                    <source src={video} type="video/mp4"/>
+                    <source src={video} type="video/mp4"/> 
                 </video>
                 {classInfo.instructor && 
                 <UserCard user={{
@@ -169,7 +167,7 @@ export const ClassDetails = () => {
                 <h3>Recomendaciones</h3>
                 <ul>
                     <li>Llevar suficiente agua.</li>
-                    <li>Trae una toalla pequenia</li>
+                    <li>Trae una toalla pequeña.</li>
                     <li>Ropa comoda.</li>
                 </ul>
              </div>
@@ -210,28 +208,28 @@ export const ClassDetails = () => {
             }
 
             <Modal 
-                title='Cancelar clase?' 
-                confirmText='Si, cancelar' 
+                title='¿Cancelar clase?' 
+                confirmText='Sí, cancelar' 
                 closeText='No' 
-                content='Sera eliminada la clase del calendario, se les notificara a los integrantes inscritos y se les devolvera como clase a favor.'
+                content='Será eliminada la clase del calendario, se les notificará a los integrantes inscritos y se les devolverá como clase a favor.'
                 onConfirm={handleCancelClassConfirm}
                 onClose={() => setShowModal(false)}
                 show={showModal} />
 
             <Modal 
-                title='Deseas cancelar la inscripcion?' 
-                confirmText='Si, cancelar' 
+                title='¿Deseas cancelar la inscripcion?' 
+                confirmText='Sí, cancelar' 
                 closeText='No' 
-                content='Perderas el lugar a la clase y si son menos de 24 horas, perderas la clase a favor.'
+                content='Perderás el lugar a la clase y si son menos de 24 horas, perderás la clase a favor.'
                 onConfirm={handleCancelClassConfirm}
                 onClose={() => setShowCancelModal(false)}
                 show={showCancelModal} />
 
             <Modal 
-                title='Eliminar Integrante?' 
-                confirmText='Si, eliminar' 
+                title='¿Eliminar Integrante?' 
+                confirmText='Sí, eliminar' 
                 closeText='Cancelar' 
-                content='Se le notificara al integrante y la clase se le devolvera como clase a favor.'
+                content='Se le notificará al integrante y la clase se le devolverá como clase a favor.'
                 onConfirm={handleCancelClassConfirm}
                 onClose={() => setShowDeleteUserFromClassModal(false)}
                 show={showDeleteUserFromClassModal} />
@@ -267,8 +265,8 @@ export const ClassDetails = () => {
             {user.purchasedPackages && <Modal 
                 title='Inscribirme' 
                 confirmText='Aceptar' 
-                closeText='cancelar' 
-                content={`Usaras una de tus clases a favor. Actualmente cuentas con ${calculateUserClasses(user.purchasedPackages)} clases a favor.`}
+                closeText='Cancelar' 
+                content={`Usarás una de tus clases a favor. Actualmente cuentas con ${calculateUserClasses(user.purchasedPackages)} clases.`}
                 onConfirm={handleBookingClass}
                 onClose={() => setShowBookModal(false)}
                 show={showBookModal} />}

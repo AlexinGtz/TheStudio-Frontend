@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react';
 import './UserDetails.css'
+import userIcon from '../../assets/Icons/user_icon.svg'
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getUserInfo } from '../../model/api/api';
 import { formatPhoneNumber } from '../../formatters';
@@ -8,7 +9,6 @@ import { PackageExpiration } from '../../components/PackageExpiration/PackageExp
 import { Button } from '../../components/Button/Button';
 import { useNavigate } from 'react-router-dom';
 import { Spinner } from '../../components/Spinner/Spinner';
-import userIcon from '../../assets/Icons/user_icon.svg'
 
 export const UserDetails = () => {
     const { userPhoneNumber } = useParams();
