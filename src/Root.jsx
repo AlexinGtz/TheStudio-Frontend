@@ -18,10 +18,12 @@ export const Root = (props) => {
     }
 
     const handleGetAllUsers = async () => {
-        if(!registeredUsers || registeredUsers.length === 0){
-            const res = await getRegisteredUsers();
-            if(res.users.length > 0) {
-                dispatch(setRegisteredUsers(res));
+        if(localStorage.getItem('token')) {
+            if(!registeredUsers || registeredUsers.length === 0){
+                const res = await getRegisteredUsers();
+                if(res.users.length > 0) {
+                    dispatch(setRegisteredUsers(res));
+                }
             }
         }
     }

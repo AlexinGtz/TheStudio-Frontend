@@ -3,8 +3,8 @@ import { getToken } from '../../localStorage';
 import { enqueueSnackbar } from 'notistack';
 
 const getApiUrl = () => {
-    //return import.meta.env.DEV ? 'https://qa-api.thestudioapp.com' : 'https://api.thestudioapp.com';
-    return import.meta.env.DEV ? 'http://localhost:3000' : 'https://api.thestudioapp.com';
+    return import.meta.env.DEV ? 'https://qa-api.thestudioapp.com' : 'https://api.thestudioapp.com';
+    // return import.meta.env.DEV ? 'http://localhost:3000' : 'https://api.thestudioapp.com';
 }
 
 const instance = axios.create({
