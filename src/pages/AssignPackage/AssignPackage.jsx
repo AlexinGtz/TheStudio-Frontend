@@ -27,7 +27,7 @@ export const AssignPackage = () => {
     const user = registeredUsers.find(user => user.phoneNumber === userPhoneNumber);
 
     return (
-        <div>
+        <div className='assignPackageContainer'>
             <AvailablePackages displayType={packageDisplayType.ADMIN_ADD} onButtonClick={handleButtonClick} />
             <Modal 
                 title='¿Asignar paquete?' 

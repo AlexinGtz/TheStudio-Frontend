@@ -29,3 +29,9 @@
 .extraPackagesTitleExpanded {
     margin: 0;
 }
+
+@media screen and (min-width: 1200px) {
+    .extraPackagesContainer {
+        width: 30%;
+    }
+}

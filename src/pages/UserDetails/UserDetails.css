@@ -40,3 +40,17 @@
     margin-top: 1rem;
     width: 90%;
 }
+
+@media screen and (min-width: 1200px) {
+    .userDetailsInfoContainer {
+        width: 30%;
+    }
+
+    .userDetailsButton {
+        margin-left: 35%;
+    }
+
+    .userDetailsAssignButton {
+        width: 30%;
+    }
+}

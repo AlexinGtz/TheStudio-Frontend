@@ -43,9 +43,11 @@ export const Users = () => {
 
     return (
         <div className='usersContainer'>
-            <h1>Usuarios</h1>
-            <SearchBar updateFilter={setFilter} />
-            <UsersList users={filteredUsers} deleteEnabled />
+            <div className='usersContent'>
+                <h1 className='usersTitle'>Usuarios</h1>
+                <SearchBar updateFilter={setFilter} />
+                <UsersList users={filteredUsers} deleteEnabled />
+            </div>
         </div>
     );
 }

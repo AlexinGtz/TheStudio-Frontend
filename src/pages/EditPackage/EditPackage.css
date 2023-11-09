@@ -22,3 +22,17 @@
     flex-direction: column;
     align-items: center;
 }
+
+@media screen and (min-width: 1200px) {
+    .editPackageButtons {
+        width: 25%;
+    }
+
+    .editPackageInputs {
+        width: 30%;
+    }
+
+    .editPackageContainer {
+        justify-content: space-evenly;
+    }
+}

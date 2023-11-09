@@ -15,6 +15,7 @@
 
 .editableInputIcon {
     flex: 1;
+    cursor: pointer;
 }
 
 .editableInputTitle {
@@ -39,4 +40,10 @@
 .editableInputData:focus {
     border: none;
     outline: none;
+}
+
+@media screen and (min-width: 1200px) {
+    .editableInputContainer {
+        width: 30%;
+    }
 }

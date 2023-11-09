@@ -11,7 +11,7 @@ export const Button = (props) => {
 
     return (
         <div className={`buttonContainer ${props.buttonStyle ?? buttonStyle.normal} ${props.className ?? ''}`} onClick={props.onClick}>
-            {props.text}
+            <p className='buttonText'>{props.text}</p>
         </div>
     );
 }

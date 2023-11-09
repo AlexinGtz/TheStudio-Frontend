@@ -25,6 +25,7 @@ instance.interceptors.response.use((response) => response.data, (error) => {
 });
 
 export const login = async (phoneNumber, password) => {
+  console.log('CALLED');
     return instance.post('/login', {phoneNumber, password}, {
       headers: {
         'Content-Type': 'application/json',

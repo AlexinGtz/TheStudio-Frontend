@@ -18,3 +18,10 @@
 .profileLogoutButton {
     width: 90%;
 }
+
+@media screen and (min-width: 1200px) {
+    .profileCentered, 
+    .profileLogoutButton {
+        width: 30%;
+    }
+}

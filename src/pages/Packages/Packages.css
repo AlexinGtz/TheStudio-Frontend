@@ -88,3 +88,10 @@
 .packageExpire {
     margin-bottom: 1rem !important;
 }
+
+@media screen and (min-width: 1200px) {
+    .packagesContainer > h1 {
+        width: 30%;
+        align-self: center;
+    }
+}

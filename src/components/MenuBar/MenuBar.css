@@ -9,3 +9,12 @@
     align-items: center;
     height: 5rem;
 }
+
+
+
+@media screen and (min-width: 1200px) {
+    .menuBarContainer{
+        justify-content: space-evenly;
+
+    }
+} 

@@ -118,3 +118,34 @@
     padding: 0.5rem 1rem;
     margin: 1rem 0;
 }
+
+@media screen and (min-width: 1200px) {
+    .calendarContainer {
+        width: 40%;
+    } 
+    
+    .calendarContent {
+        height: 0.6rem;
+        width: 0.6rem;
+    }
+
+    .calendarTile {
+        height: 6rem;
+    }
+
+    .calendarContainer 
+    > .react-calendar__navigation
+    > .react-calendar__navigation__label {
+        height: 3rem;
+    }
+
+    .calendarContainer 
+        > .react-calendar__navigation
+        > .react-calendar__navigation__prev-button, 
+    .calendarContainer 
+        > .react-calendar__navigation
+        > .react-calendar__navigation__next-button {
+            width: 3rem;
+            height: 3rem;
+    }
+}

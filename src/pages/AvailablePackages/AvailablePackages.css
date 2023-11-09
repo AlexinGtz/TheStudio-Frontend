@@ -23,3 +23,9 @@
     width: 60%;
     height: 2rem;
 }
+
+@media screen and (min-width: 1200px) {
+    .availablePackagesContainer {
+        width: 35%;
+    }
+}

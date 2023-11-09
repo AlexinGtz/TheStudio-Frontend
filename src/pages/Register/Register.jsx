@@ -50,7 +50,7 @@ export const Register = () => {
 
     return (
         <div className='registerContainer'>
-            <div className='classDetailsGoBack'>
+            <div className='registerGoBack'>
                 <Button className='classDetailsButton' text='Atras' onClick={goBack} />        
             </div>
             <Logo vertical={true} />

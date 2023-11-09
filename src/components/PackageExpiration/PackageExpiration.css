@@ -17,3 +17,13 @@
 .packageExpirationLatest > p {
     margin: 0 0 1rem 0;
 }
+
+@media screen and (min-width: 1200px) {
+    .packageExpirationLatest {
+        width: 30%;
+    }
+
+    .packagesLatest {
+        width: 30%;
+    }
+}

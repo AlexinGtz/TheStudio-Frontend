@@ -17,3 +17,14 @@
 .banner > .logoHorizontal > h2 {
     font-weight: 100;
 }
+
+@media screen and (min-width: 1200px) {
+    .banner {
+        height: 4rem;
+    }
+
+    .banner > .logoHorizontal {
+        font-size: 16px;
+    }
+    
+}

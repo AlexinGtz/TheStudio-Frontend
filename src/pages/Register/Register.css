@@ -19,3 +19,14 @@
     width: 100%;
     background-color: var(--accent-color);
 }
+
+.registerGoBack {
+    margin-top: 2rem;
+    width: 20%;
+}
+
+@media screen and (min-width: 1200px) {
+    .registerInputs {
+        width: 20%;
+    }
+}
