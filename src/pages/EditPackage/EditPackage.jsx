@@ -23,6 +23,7 @@ export const EditPackage = () => {
     if(!selectedPackage) return <h1>Cargando...</h1>
 
     const handleSaveChanges = async () => {
+        selectedPackage.cost = parseInt(selectedPackage.cost);
         const res = await editPackageInfo(selectedPackage);
         if(res.statusCode === 200) {
             dispatch(restorePackages());
@@ -44,8 +45,12 @@ export const EditPackage = () => {
                     />
                 <InputPackage 
                     title='Precio' 
-                    quantity={selectedPackage.cost} 
-                    setQuantity={cost => setSelectedPackage({...selectedPackage, cost: cost})}
+                    quantity={`$${selectedPackage.cost}`} 
+                    setQuantity={cost => {
+                        if(cost[0] === '$') cost = cost.slice(1);
+                        setSelectedPackage({...selectedPackage, cost: cost});
+                    }}
+                    type={'text'}
                     />
                 <InputPackage 
                     title='Días de vigencia' 
