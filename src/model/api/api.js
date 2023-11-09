@@ -195,11 +195,13 @@ export const editUserData = ({
 export const updateUserPassword = ({
   currentPassword,
   newPassword,
+  resetPassword
 }) => {
   return instance.post('/updateUserPassword',
   {
     currentPassword,
-    newPassword
+    newPassword,
+    resetPassword
   },
   {
     headers: {

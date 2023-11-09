@@ -45,7 +45,10 @@ export const Root = (props) => {
             }
         }
 
-        if((!location.pathname.includes('/login') && !location.pathname.includes('/register')) && !localStorage.getItem('token')) {
+        if((!location.pathname.includes('/login') 
+                && !location.pathname.includes('/register')
+                && !location.pathname.includes('/forgotPassword')) 
+                    && !localStorage.getItem('token')) {
             navigate('/login');
             return;
         }

@@ -2,11 +2,11 @@ import './UpdatePassword.css'
 import { PasswordInput } from '../../components/PasswordInput/PasswordInput';
 import { useState } from 'react';
 import { Button, buttonStyle } from '../../components/Button/Button';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { enqueueSnackbar } from 'notistack';
 import { updateUserPassword } from '../../model/api/api';
 
-export const UpdatePassword = () => {
+export const UpdatePassword = ({resetPassword}) => {
     const [currentPassword, setCurrentPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [confirmNewPassword, setConfirmNewPassword] = useState('');
@@ -17,7 +17,7 @@ export const UpdatePassword = () => {
     }
 
     const validateInputs = async () => {
-        if(!currentPassword || !newPassword || !confirmNewPassword){
+        if((!currentPassword && !resetPassword) || !newPassword || !confirmNewPassword){
             enqueueSnackbar('Por favor, complete todos los campos', { variant: 'error' })
             return;
         }
@@ -26,26 +26,31 @@ export const UpdatePassword = () => {
             return;
         
         };
-        const res = await updateUserPassword({currentPassword, newPassword});
+        // TODO remove if when API is ready
+        if(location.pathname === '/forgotPassword') {
+            goBack();
+            return;
+        }
+        const res = await updateUserPassword({currentPassword, newPassword, resetPassword});
         if(res.statusCode >= 400) {
             enqueueSnackbar(res.message, { variant: 'error' })
             return;
         } 
-        enqueueSnackbar('Contraseña actualizada correctamente', { variant: 'success' })
+        enqueueSnackbar('Contraseña actualizada correctamente', { variant: 'success' });
         goBack();
     }
 
     return (
         <div className='updatePasswordContainer'>
             <div className='updatePasswordCentered'>
-                <h2>Cambiar contraseña</h2>
-                <PasswordInput 
+                <h2>{resetPassword ? 'Restablecer contraseña' : 'Cambiar contraseña'}</h2>
+                {!resetPassword && <PasswordInput 
                     placeholder='Contraseña actual' 
                     id='currentPassword'
                     value={currentPassword} 
                     onChange={(e) => { 
                         setCurrentPassword(e.target.value)
-                        }}  />
+                        }}  />}
                 <PasswordInput 
                     placeholder='Nuevo contraseña' 
                     id='newPassword'
