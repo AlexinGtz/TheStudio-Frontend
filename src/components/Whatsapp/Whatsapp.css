@@ -14,18 +14,12 @@
     width: 100%;
 }
 
-.whatsappTitle {
+.whatsappButton, .whatsappInput, .whatsappText, .whatsappTitle {
     width: 90%;
 }
 
-.whatsappText {
-    width: 90%;
-}
-
-.whatsappInput {
-    width: 90%;
-}
-
-.whatsappButton {
-    width: 90%;
+@media screen and (min-width: 1200px) {
+    .whatsappButton, .whatsappInput, .whatsappText, .whatsappTitle {
+        width: 50%;
+    }
 }
