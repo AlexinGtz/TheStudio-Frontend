@@ -12,7 +12,7 @@ export const Modal = ({
 }) => {
 
     if(!show) return null;
-    //TODO: clicking on the modal container should not close the modal
+    
     return (
         <div className='modalBackdrop'>
             <div className='modalContainer'>

@@ -46,8 +46,6 @@ export const UsersModal = ({
 
     if(!show) return null;
 
-
-    //TODO: clicking on the modal container should not close the modal
     return (
         <div className='usersModalBackdrop'>
             <div className='usersModalContainer'>

@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ClassCard } from '../../components/ClassCard/ClassCard';
 import { setClasses } from '../../redux/reducers/classesReducer';
 import { userTypes } from '../../constants';
+import { enqueueSnackbar } from 'notistack';
 
 export const StudioCalendar = () => {
     const classes = useSelector(state => state.classes);
@@ -40,7 +41,10 @@ export const StudioCalendar = () => {
 
     const handleGetClasses = async () => {
         const res = await getUpcomingClasses();
-        //TODO: check if res.classes is empty
+        if(!res || !res.classes || res.classes.length === 0) {
+            enqueueSnackbar('No hay clases disponibles', { variant: 'error' });
+            return;
+        }
         dispatch(setClasses(res.classes));
     }
 
