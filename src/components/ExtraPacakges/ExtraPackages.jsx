@@ -3,6 +3,7 @@ import { PackageExpiration } from '../PackageExpiration/PackageExpiration';
 import { useEffect, useState } from 'react';
 
 export const ExtraPackages = ({packages}) => {
+    console.log('EXTRA', packages);
     const [collapsed, setCollapsed] = useState(true);
     const [containerClass, setContainerClass] = useState(['extraPackagesContainer']);
     const [titleClassName, setTitleClassName] = useState(['extraPackagesTitle']);

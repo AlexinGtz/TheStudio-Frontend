@@ -25,8 +25,8 @@ export const Packages = () => {
             setFilteredPackages(purchasedPackages.filter((p) => (
                 p.expireDate !== earliestPackage.expireDate 
                 && p.availableClasses > 0
-                && p.expireDate > new Date()
-                )));
+                && new Date(p.expireDate) > new Date()
+            )));
         }
     }, [earliestPackage]);
     

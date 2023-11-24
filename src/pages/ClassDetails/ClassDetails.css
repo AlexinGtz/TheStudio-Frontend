@@ -128,3 +128,29 @@
     width: 60%;
     height: 2.5rem;
 }
+
+@media screen and (min-width: 1200px) {
+    .classDetailsGoBack,
+    .classDetailsDateContainer,
+    .classDetailsHour,
+    .classDetailsImageContainer,
+    .classDetailsRecommendations,
+    .classDetailsBalance {
+        width: 50%;
+    }
+
+    .classDetailsBalance {
+        padding: 0.5rem 0;
+    }
+
+    .classDetailsBalance > p {
+        margin-left: 5%;
+    }
+    .classDetailsNumber {
+        margin-right: 5%;
+    }
+
+    .classDetailsRegisterButton {
+        width: 20%;
+    }
+}
