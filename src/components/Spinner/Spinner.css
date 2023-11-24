@@ -45,3 +45,10 @@
   position: fixed;
   z-index: 100;
 }
+
+@media screen and (min-width: 1200px) {
+  .lds-ring {
+    left: 48%;
+    top: 45%;
+  }
+}
