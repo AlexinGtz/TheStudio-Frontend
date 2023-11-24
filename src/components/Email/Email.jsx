@@ -5,9 +5,12 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { enqueueSnackbar } from 'notistack';
 import { sendVerificationCode, verifyCode } from '../../model/api/api';
+import { setLoading } from '../../redux/reducers/loadingReducer';
+import { useDispatch } from 'react-redux';
 
 export const Email = ({step, setStep, setToken}) => {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const [inputData, setInputData] = useState('');
     const [userPhone, setUserPhone] = useState('');
 
@@ -25,8 +28,9 @@ export const Email = ({step, setStep, setToken}) => {
             enqueueSnackbar('Por favor, ingresa un numero telefonico valido', { variant: 'error' });
             return;
         }
-
+        dispatch(setLoading(true));
         const res = await sendVerificationCode(inputData);
+        dispatch(setLoading(false));
         if(!res) {
             return;
         }
@@ -40,9 +44,9 @@ export const Email = ({step, setStep, setToken}) => {
             enqueueSnackbar('Por favor, ingresa un codigo valido', { variant: 'error' });
             return;
         }
-        
+        dispatch(setLoading(true));
         const res = await verifyCode(inputData, userPhone);
-
+        dispatch(setLoading(false));
         if(!res) {
             enqueueSnackbar('El codigo ingresado es incorrecto, por favor intenta de nuevo', { variant: 'error' });
             return;

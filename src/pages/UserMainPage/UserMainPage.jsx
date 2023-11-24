@@ -2,16 +2,21 @@ import './UserMainPage.css'
 import { useEffect, useState } from 'react';
 import { getUserBookedClasses } from '../../model/api/api';
 import { ClassCard } from '../../components/ClassCard/ClassCard';
+import { setLoading } from '../../redux/reducers/loadingReducer';
+import { useDispatch } from 'react-redux';
 
 export const UserMainPage = () => {
     const [classes, setClasses] = useState([]);
+    const dispatch = useDispatch();
     
     useEffect(() => {
         handleGetClasses();
     }, []);
 
     const handleGetClasses = async () => {
+        dispatch(setLoading(true));
         const res = await getUserBookedClasses();
+        dispatch(setLoading(false));
         setClasses(res.classes.sort((a, b) => a.date > b.date ? 1 : -1));
     }
 

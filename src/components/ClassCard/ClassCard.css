@@ -73,3 +73,9 @@
     width: 1rem;
     margin-right: 0.3rem;
 }
+
+@media screen and (max-width: 700px) {
+    .classCardTimeText {
+        font-size: 10px;
+    }
+}

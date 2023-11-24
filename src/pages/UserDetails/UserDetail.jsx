@@ -9,18 +9,23 @@ import { PackageExpiration } from '../../components/PackageExpiration/PackageExp
 import { Button } from '../../components/Button/Button';
 import { useNavigate } from 'react-router-dom';
 import { Spinner } from '../../components/Spinner/Spinner';
+import { setLoading } from '../../redux/reducers/loadingReducer';
+import { useDispatch } from 'react-redux';
 
 export const UserDetails = () => {
     const { userPhoneNumber } = useParams();
     const [userInfo, setUserInfo] = useState({});
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     useEffect(() => {
         handleGetUserInfo(userPhoneNumber)
     }, [userPhoneNumber])
 
     const handleGetUserInfo = async (phone) => {
+        dispatch(setLoading(true));
         const userInfo = await getUserInfo(phone);
+        dispatch(setLoading(false));
         setUserInfo(userInfo);
     }
 

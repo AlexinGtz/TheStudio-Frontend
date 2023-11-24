@@ -8,10 +8,12 @@
 
 .Logo > h1 {
     margin: 0;
+    font-size: 35px;
 }
 
 .Logo > h2 {
     margin: 0;
+    font-size: 25px;
 }
 
 .logoVertical {
@@ -26,4 +28,32 @@
 
 .logoHorizontal > h2 {
     margin-left: 0.5rem;
+}
+
+@media screen and (min-width: 1200px) {
+    .Logo > h1 {
+        font-size: 50px;
+    }
+    
+    .Logo > h2 {
+        font-size: 40px;
+    }
+
+    .Logo {
+        margin: 4rem 0;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .Logo > h1 {
+        font-size: 20px;
+    }
+    
+    .Logo > h2 {
+        font-size: 15px;
+    }
+
+    .Logo {
+        margin: 4rem 0;
+    }
 }

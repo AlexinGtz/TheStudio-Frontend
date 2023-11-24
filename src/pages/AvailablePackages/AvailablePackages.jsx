@@ -1,9 +1,10 @@
 import './AvailablePackages.css'
 import { getPackages } from '../../model/api/api';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Button } from '../../components/Button/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import { setAllPackages } from '../../redux/reducers/packagesReducer';
+import { setLoading } from '../../redux/reducers/loadingReducer';
 
 export const packageDisplayType = {
     USER: 'user',
@@ -54,7 +55,9 @@ export const AvailablePackages = ({displayType, onButtonClick}) => {
     }, []);
 
     const handleGetPackages = async () => {
+        dispatch(setLoading(true));
         const response = await getPackages();
+        dispatch(setLoading(false));
         response.packages.sort((a, b) => {
             if (a.classQuantity < b.classQuantity) {
                 return -1;

@@ -9,6 +9,8 @@ import { useNavigate } from 'react-router-dom';
 import { validateRegisterForm } from '../../validators';
 import { registerUser } from '../../model/api/api';
 import { useSnackbar } from 'notistack';
+import { setLoading } from '../../redux/reducers/loadingReducer';
+import { useDispatch } from 'react-redux';
 
 export const Register = () => {
     const [firstName, setFirstName] = useState('');
@@ -17,6 +19,7 @@ export const Register = () => {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const {enqueueSnackbar} = useSnackbar();
 
     const goBack = () => {
@@ -36,13 +39,14 @@ export const Register = () => {
             enqueueSnackbar('Complete los campos requeridos', { variant: 'error' });
             return;
         }
-
+        dispatch(setLoading(true));
         const response = await registerUser({
             firstName,
             lastName,
             phoneNumber,
             password
         });
+        dispatch(setLoading(false));
         if(!response) return alert('Ha ocurrido un error al registrarse');
         enqueueSnackbar('Usuario registrado correctamente', { variant: 'success' });
         navigate('/login');

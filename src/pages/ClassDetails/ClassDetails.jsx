@@ -1,7 +1,7 @@
 import './ClassDetails.css'
 import flame from '../../assets/Icons/flame_outline.svg'
 import time from '../../assets/Icons/time_outline.svg'
-import video from '../../assets/Videos/pilates.mp4';
+import pilatesImage from '../../assets/Images/pilates.jpg';
 import rightArrow from '../../assets/Icons/right_arrow.svg';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
@@ -18,6 +18,7 @@ import { restoreClasses } from '../../redux/reducers/classesReducer';
 import { replaceBookedClasses } from '../../redux/reducers/userReducer';
 import { UsersModal } from '../../components/UsersModal/UsersModal';
 import { enqueueSnackbar } from 'notistack';
+import { setLoading } from '../../redux/reducers/loadingReducer';
 
 export const ClassDetails = () => {
     const classes = useSelector((state) => state.classes);
@@ -52,28 +53,36 @@ export const ClassDetails = () => {
     }, [classInfo]);
 
     const handleGetClassInformation = async () => {
+        dispatch(setLoading(true));
         const res = await getClassInfo(classId);
+        dispatch(setLoading(false));
         setClassInfo(res);
     }
 
     const handleBookingClass = async () => {
+        dispatch(setLoading(true));
         await bookClass({
             classDate: classId
         });
+        dispatch(setLoading(false));
         handleSuceedBooking();
     }
 
     const handleCancelClassConfirm = async () => {
+        dispatch(setLoading(true));
         await cancelClass(classId, userNumber ?? undefined);
+        dispatch(setLoading(false));
         handleSuceedBooking();
     }
 
     const handleBookClassForUsers = async () => {
+        dispatch(setLoading(true));
         const res = await bookClass({
             classDate: classId,
             users: selectedUsers,
         });
-
+        dispatch(setLoading(false));
+        
         if(res?.statusCode === 200) {
             enqueueSnackbar('Clase reservada correctamente', { variant: 'success' });
             return;
@@ -97,7 +106,9 @@ export const ClassDetails = () => {
 
     const handleSuceedBooking = async () => {
         dispatch(restoreClasses());
+        dispatch(setLoading(true));
         const newClasses = await getUserClasses();
+        dispatch(setLoading(false));
         dispatch(replaceBookedClasses(newClasses.classes));
         navigate('/calendar');
     }
@@ -153,15 +164,14 @@ export const ClassDetails = () => {
                     <p className='classDetailsTimeText'><b>250 cal.</b></p>
                 </div>
             </div>
-            <div className='classDetailsVideoContainer'>
-                <video className='classDetailsVideo' width='90%' autoPlay='autoPlay' controls muted>
-                    <source src={video} type="video/mp4"/> 
-                </video>
+            <div className='classDetailsImageContainer'>
+                <img className='classDetailsImage' src={pilatesImage} alt="image" />
                 {classInfo.instructor && 
-                <UserCard user={{
-                    firstName: classInfo.instructor.split(' ')[0],
-                    lastName: classInfo.instructor.split(' ')[1],
-                }}/>}
+                    <UserCard user={{
+                        firstName: `Instructora: ${classInfo.instructor.split(' ')[0]}`,
+                        lastName: classInfo.instructor.split(' ')[1],
+                    }}/>
+                }
             </div>
              <div className='classDetailsRecommendations'>
                 <h3>Recomendaciones</h3>

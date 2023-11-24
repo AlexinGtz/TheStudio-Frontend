@@ -7,6 +7,7 @@ import { enqueueSnackbar } from 'notistack';
 import { editUserData } from '../../model/api/api';
 import { useSelector, useDispatch } from 'react-redux';
 import { replaceUserInfo } from '../../redux/reducers/userReducer';
+import { setLoading } from '../../redux/reducers/loadingReducer';
 
 export const EditableInput = ({id, title, data, updateData, formatter, extraStepLink, showIcon}) => {
     const [editMode, setEditMode] = useState(false);
@@ -27,7 +28,9 @@ export const EditableInput = ({id, title, data, updateData, formatter, extraStep
     const handleClickOutside = async () => {
         setEditMode(false);
         if(data === user[id]) return;
+        dispatch(setLoading(true));
         const res = await editUserData({[id]: data});
+        dispatch(setLoading(false));
         if(res.statusCode === 200) {
             enqueueSnackbar('Datos actualizados', { variant: 'success' });
         } else {

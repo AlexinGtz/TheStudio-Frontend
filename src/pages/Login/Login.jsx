@@ -10,6 +10,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { formatPhoneNumber } from '../../formatters';
 import { buttonStyle } from '../../components/Button/Button';
+import { setLoading } from '../../redux/reducers/loadingReducer';
 
 export const Login = () => {
     const [phoneNumber, setPhoneNumber] = useState('');
@@ -19,7 +20,9 @@ export const Login = () => {
 
     const handleLogin = async () => {
         const formattedNumber = phoneNumber.replace(/\D/g, '');
+        dispatch(setLoading(true));
         const response = await login(formattedNumber, password);
+        dispatch(setLoading(false));
         if(!response){
             return;
         };

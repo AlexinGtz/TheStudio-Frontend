@@ -6,6 +6,7 @@ import { getRegisteredUsers } from '../../model/api/api';
 import { useDispatch } from 'react-redux';
 import { setRegisteredUsers } from '../../redux/reducers/registeredUsersReducer';
 import { UsersList } from '../../components/UsersList/UsersList';
+import { setLoading } from '../../redux/reducers/loadingReducer';
 
 export const Users = () => {
     const dispatch = useDispatch();
@@ -20,7 +21,9 @@ export const Users = () => {
     }, []);
 
     const handleGetUsers = async () => {
+        dispatch(setLoading(true));
         const res = await getRegisteredUsers();
+        dispatch(setLoading(false));
         dispatch(setRegisteredUsers({ 
             users: res.users,
             lastEvaluatedKey: res.lastEvaluatedKey,

@@ -59,9 +59,9 @@ export const UsersModal = ({
                         :
                         classInfo?.registeredUsers &&
                         classInfo.registeredUsers.map((user) => (
-                            <div className='usersModalCard'>
+                            <div className='usersModalCard' key={user}>
                                 <UserCard 
-                                    user={user} 
+                                    user={user.phoneNumber} 
                                     displayRightIcon 
                                     rightIconType='delete' 
                                     disableUserClick

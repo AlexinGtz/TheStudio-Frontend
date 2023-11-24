@@ -29,7 +29,7 @@
     margin: 0;
 }
 
-.classDetailsVideoContainer {
+.classDetailsImageContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -37,6 +37,10 @@
     border-radius: 10px;
     width: 90%;
     margin: 1rem 0 0 0;
+}
+
+.classDetailsImage {
+    width: 100%;
 }
 
 .classDetailsVideo {

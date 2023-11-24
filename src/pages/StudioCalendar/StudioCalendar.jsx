@@ -8,6 +8,7 @@ import { ClassCard } from '../../components/ClassCard/ClassCard';
 import { setClasses } from '../../redux/reducers/classesReducer';
 import { userTypes } from '../../constants';
 import { enqueueSnackbar } from 'notistack';
+import { setLoading } from '../../redux/reducers/loadingReducer';
 
 export const StudioCalendar = () => {
     const classes = useSelector(state => state.classes);
@@ -40,7 +41,9 @@ export const StudioCalendar = () => {
     }, [classes, selectedDate]);
 
     const handleGetClasses = async () => {
+        dispatch(setLoading(true));
         const res = await getUpcomingClasses();
+        dispatch(setLoading(false));
         if(!res || !res.classes || res.classes.length === 0) {
             enqueueSnackbar('No hay clases disponibles', { variant: 'error' });
             return;

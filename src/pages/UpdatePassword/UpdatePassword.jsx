@@ -2,15 +2,18 @@ import './UpdatePassword.css'
 import { PasswordInput } from '../../components/PasswordInput/PasswordInput';
 import { useState } from 'react';
 import { Button, buttonStyle } from '../../components/Button/Button';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { enqueueSnackbar } from 'notistack';
 import { forgotPassword, updateUserPassword } from '../../model/api/api';
+import { setLoading } from '../../redux/reducers/loadingReducer';
+import { useDispatch } from 'react-redux';
 
 export const UpdatePassword = ({resetPassword, token}) => {
     const [currentPassword, setCurrentPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [confirmNewPassword, setConfirmNewPassword] = useState('');
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const goBack = () => {
         navigate(-1);
@@ -32,11 +35,15 @@ export const UpdatePassword = ({resetPassword, token}) => {
         }
         let res = null;
 
+        dispatch(setLoading(true));
+
         if(resetPassword) { 
             res = await forgotPassword({newPassword, token});
         } else {
             res = await updateUserPassword({currentPassword, newPassword});
         }
+
+        dispatch(setLoading(false));
 
         if(!res || res.statusCode >= 400) {
             enqueueSnackbar(res.message ?? 'Error al actualizar contraseña. Intente de nuevo más tarde', { variant: 'error' })

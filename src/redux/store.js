@@ -4,6 +4,8 @@ import userReducer from './reducers/userReducer'
 import classesReducer from './reducers/classesReducer'
 import packagesReducer from './reducers/packagesReducer'
 import registeredUsersReducer from './reducers/registeredUsersReducer'
+import loadingReducer from './reducers/loadingReducer'
+
 
 export const store = configureStore({
   reducer: {
@@ -12,5 +14,6 @@ export const store = configureStore({
     classes: classesReducer,
     packages: packagesReducer,
     registeredUsers: registeredUsersReducer,
+    loading: loadingReducer
   }
 })

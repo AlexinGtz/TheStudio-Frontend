@@ -5,23 +5,30 @@ import { getUserProfile, getRegisteredUsers } from './model/api/api';
 import { setProfile } from './redux/reducers/userReducer';
 import { setRegisteredUsers } from './redux/reducers/registeredUsersReducer';
 import { userTypes } from './constants';
+import { Spinner } from './components/Spinner/Spinner';
+import { setLoading } from './redux/reducers/loadingReducer';
 
 export const Root = (props) => {
     const user = useSelector(state => state.user);
     const registeredUsers = useSelector(state => state.registeredUsers.users);
+    const loading = useSelector(state => state.loading);
     const navigate = useNavigate();
     const location = useLocation();
     const dispatch = useDispatch();
 
     const handleGetUserProfile = async () => {
+        dispatch(setLoading(true));
         const res = await getUserProfile();
+        dispatch(setLoading(false));
         dispatch(setProfile(res));
     }
 
     const handleGetAllUsers = async () => {
         if(localStorage.getItem('token') && user.userType === userTypes.ADMIN) {
             if(!registeredUsers || registeredUsers.length === 0){
+                dispatch(setLoading(true));
                 const res = await getRegisteredUsers();
+                dispatch(setLoading(false));
                 if(res.users.length > 0) {
                     dispatch(setRegisteredUsers(res));
                 }
@@ -67,9 +74,12 @@ export const Root = (props) => {
 
     }, [navigate, location]);
 
+    console.log('Loading', loading);
+
     return (
         <>
             {props.children}
+            {loading && <Spinner />}
         </>
     );
 }

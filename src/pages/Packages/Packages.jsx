@@ -22,7 +22,11 @@ export const Packages = () => {
 
     useEffect(() => {
         if (earliestPackage) {
-            setFilteredPackages(purchasedPackages.filter((p) => (p.expireDate !== earliestPackage.expireDate && p.availableClasses > 0)));
+            setFilteredPackages(purchasedPackages.filter((p) => (
+                p.expireDate !== earliestPackage.expireDate 
+                && p.availableClasses > 0
+                && p.expireDate > new Date()
+                )));
         }
     }, [earliestPackage]);
     

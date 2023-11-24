@@ -5,7 +5,8 @@ import { Modal } from '../../components/Modal/Modal';
 import { addPackageToUser } from '../../model/api/api';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { setLoading } from '../../redux/reducers/loadingReducer';
 
 export const AssignPackage = () => {
     const registeredUsers = useSelector(state => state.registeredUsers.users);
@@ -13,6 +14,7 @@ export const AssignPackage = () => {
     const [selectedPackage, setSelectedPackage] = useState(null);	
     const { userPhoneNumber } = useParams();
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const handleButtonClick = (packageAvailable) => {
         setShowModal(true);
@@ -20,7 +22,9 @@ export const AssignPackage = () => {
     }
 
     const handleAssignPackage = async () => {
+        dispatch(setLoading(true));
         await addPackageToUser(userPhoneNumber, selectedPackage.id);
+        dispatch(setLoading(false));
         navigate(`/user/${userPhoneNumber}`)
     }
 

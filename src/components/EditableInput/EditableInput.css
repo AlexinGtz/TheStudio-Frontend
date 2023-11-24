@@ -47,3 +47,22 @@
         width: 30%;
     }
 }
+
+@media screen and (max-width: 700px) {
+    .editableInputContainer {
+        width: 100%;
+    }
+
+    .editableInputInfo {
+        flex: 4;
+    }
+
+    .editableInputTitle{
+        font-size: 12px;
+        margin: 0.2rem 0;
+    }
+
+    .editableInputData {
+        font-size: 15px;
+    }
+}

@@ -6,6 +6,7 @@ import { deleteUser } from '../../model/api/api';
 import { enqueueSnackbar } from 'notistack';
 import { useDispatch } from 'react-redux';
 import { restoreRegisteredUsers } from '../../redux/reducers/registeredUsersReducer';
+import { setLoading } from '../../redux/reducers/loadingReducer';
 
 export const UsersList = ({users, disableUserClick, externalUserClick, selectedUsers, deleteEnabled}) => {
     const [showModal, setShowModal] = useState(false);
@@ -17,7 +18,9 @@ export const UsersList = ({users, disableUserClick, externalUserClick, selectedU
     }
 
     const handleDeleteClick = async () => {
+        dispatch(setLoading(true));
         const res = await deleteUser(selectedUser);
+        dispatch(setLoading(false));
         if(res.statusCode === 200) {
             enqueueSnackbar('Usuario eliminado correctamente', { variant: 'success' });
             dispatch(restoreRegisteredUsers());

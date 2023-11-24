@@ -1,7 +1,7 @@
 import { Login } from "../pages/Login/Login";
 import { Outlet, createBrowserRouter } from "react-router-dom";
 import { Root } from "../Root";
-import { UserMainPage } from "../pages/UserMainPAge/UserMainPage";
+import { UserMainPage } from "../pages/UserMainPage/UserMainPage";
 import { Banner } from "../components/Banner/Banner";
 import { MenuBar } from "../components/MenuBar/MenuBar";
 import { Packages } from "../pages/Packages/Packages";

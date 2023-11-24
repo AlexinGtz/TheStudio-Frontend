@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { editPackageInfo } from '../../model/api/api';
 import { enqueueSnackbar } from 'notistack';
 import { restorePackages } from '../../redux/reducers/packagesReducer';
+import { setLoading } from '../../redux/reducers/loadingReducer';
 
 export const EditPackage = () => {
     const allPackages = useSelector(state => state.packages);
@@ -24,7 +25,9 @@ export const EditPackage = () => {
 
     const handleSaveChanges = async () => {
         selectedPackage.cost = parseInt(selectedPackage.cost);
+        dispatch(setLoading(true));
         const res = await editPackageInfo(selectedPackage);
+        dispatch(setLoading(false));
         if(res.statusCode === 200) {
             dispatch(restorePackages());
             enqueueSnackbar('Paquete editado correctamente', { variant: 'success' });  
