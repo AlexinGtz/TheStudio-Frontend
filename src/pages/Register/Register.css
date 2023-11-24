@@ -22,11 +22,17 @@
 
 .registerGoBack {
     margin-top: 2rem;
+    margin-left: 2rem;
     width: 20%;
+    align-self: flex-start;
 }
 
 @media screen and (min-width: 1200px) {
     .registerInputs {
         width: 20%;
+    }
+
+    .registerGoBack {
+        align-self: center;
     }
 }

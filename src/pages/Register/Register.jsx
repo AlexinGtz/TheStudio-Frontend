@@ -35,8 +35,9 @@ export const Register = () => {
             confirmPassword
         });
         
-        if(Object.keys(validation).length > 0) {
-            enqueueSnackbar('Complete los campos requeridos', { variant: 'error' });
+        if(validation.length > 0) {
+            const errorsText = validation.join('\n'); 
+            enqueueSnackbar(errorsText, { variant: 'error', style: { whiteSpace: 'pre-line' } });
             return;
         }
         dispatch(setLoading(true));
