@@ -4,9 +4,9 @@ import { useState } from 'react';
 import { Button, buttonStyle } from '../../components/Button/Button';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { enqueueSnackbar } from 'notistack';
-import { updateUserPassword } from '../../model/api/api';
+import { forgotPassword, updateUserPassword } from '../../model/api/api';
 
-export const UpdatePassword = ({resetPassword}) => {
+export const UpdatePassword = ({resetPassword, token}) => {
     const [currentPassword, setCurrentPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [confirmNewPassword, setConfirmNewPassword] = useState('');
@@ -26,14 +26,20 @@ export const UpdatePassword = ({resetPassword}) => {
             return;
         
         };
-        // TODO remove if when API is ready
-        if(location.pathname === '/forgotPassword') {
-            goBack();
+        if(newPassword.length < 8) {
+            enqueueSnackbar('La contraseña debe tener al menos 8 caracteres', { variant: 'error' })
             return;
         }
-        const res = await updateUserPassword({currentPassword, newPassword, resetPassword});
-        if(res.statusCode >= 400) {
-            enqueueSnackbar(res.message, { variant: 'error' })
+        let res = null;
+
+        if(resetPassword) { 
+            res = await forgotPassword({newPassword, token});
+        } else {
+            res = await updateUserPassword({currentPassword, newPassword});
+        }
+
+        if(!res || res.statusCode >= 400) {
+            enqueueSnackbar(res.message ?? 'Error al actualizar contraseña. Intente de nuevo más tarde', { variant: 'error' })
             return;
         } 
         enqueueSnackbar('Contraseña actualizada correctamente', { variant: 'success' });

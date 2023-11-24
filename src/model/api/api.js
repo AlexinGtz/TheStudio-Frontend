@@ -195,13 +195,11 @@ export const editUserData = ({
 export const updateUserPassword = ({
   currentPassword,
   newPassword,
-  resetPassword
 }) => {
   return instance.post('/updateUserPassword',
   {
     currentPassword,
     newPassword,
-    resetPassword
   },
   {
     headers: {
@@ -227,6 +225,44 @@ export const deleteUser = (userPhoneNumber) => {
     headers: {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${getToken()}`
+    },
+  });
+}
+
+export const sendVerificationCode = (phoneNumber) => {
+  return instance.get(`/sendVerificationCode?phoneNumber=${phoneNumber}`,
+  {
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${getToken()}`
+    },
+  });
+}
+
+export const verifyCode = (verificationCode, phoneNumber) => {
+  return instance.post(`/verifyCode`,
+  {
+    verificationCode,
+    phoneNumber
+  },
+  {
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${getToken()}`
+    },
+  });
+}
+
+export const forgotPassword = ({newPassword, token}) => {
+  return instance.post(`/forgotPassword`,
+  {
+    newPassword,
+    token
+  },
+  {
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
     },
   });
 }

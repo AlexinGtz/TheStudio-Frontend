@@ -22,6 +22,7 @@
 
 .loginForgotPassword {
     margin-bottom: 4rem;
+    cursor: pointer;
 }
 
 @media screen and (min-width: 1200px) {
