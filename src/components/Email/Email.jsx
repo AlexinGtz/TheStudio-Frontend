@@ -25,11 +25,11 @@ export const Email = ({step, setStep, setToken}) => {
             enqueueSnackbar('Por favor, ingresa un numero telefonico valido', { variant: 'error' });
             return;
         }
-        //TODO call API to send code
+
         const res = await sendVerificationCode(inputData);
-        // if(!res) {
-        //     return;
-        // }
+        if(!res) {
+            return;
+        }
         setUserPhone(inputData);
         setStep(2);
         setInputData('');
