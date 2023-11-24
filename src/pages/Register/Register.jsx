@@ -16,6 +16,7 @@ export const Register = () => {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const navigate = useNavigate();
@@ -32,7 +33,8 @@ export const Register = () => {
             lastName,
             phoneNumber,
             password,
-            confirmPassword
+            confirmPassword, 
+            email
         });
         
         if(validation.length > 0) {
@@ -45,7 +47,8 @@ export const Register = () => {
             firstName,
             lastName,
             phoneNumber,
-            password
+            password,
+            email
         });
         dispatch(setLoading(false));
         if(!response) return alert('Ha ocurrido un error al registrarse');
@@ -81,6 +84,13 @@ export const Register = () => {
                     formatter={formatPhoneNumber}
                     onChange={(e) => { 
                         setPhoneNumber(e.target.value)
+                     }} />
+                <Input 
+                    placeholder='Correo electrónico' 
+                    type='text' 
+                    value={email} 
+                    onChange={(e) => { 
+                        setEmail(e.target.value)
                      }} />
                 <PasswordInput 
                     placeholder='Contraseña' 

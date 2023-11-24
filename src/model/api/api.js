@@ -119,14 +119,16 @@ export const registerUser = ({
   phoneNumber, 
   password, 
   firstName, 
-  lastName 
+  lastName,
+  email
 }) => {
   return instance.post('/register',
   {
     phoneNumber, 
     password, 
     firstName, 
-    lastName 
+    lastName,
+    email
   },
   {
     headers: {
