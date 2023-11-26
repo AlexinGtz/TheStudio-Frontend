@@ -75,7 +75,7 @@ export const router = createBrowserRouter([
           ),
           children: [
             {
-              path: "/",
+              path: "/userCalendar",
               element: (
                 <>
                   <UserMainPage />

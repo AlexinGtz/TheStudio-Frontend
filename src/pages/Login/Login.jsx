@@ -11,6 +11,7 @@ import { useNavigate } from 'react-router-dom';
 import { formatPhoneNumber } from '../../formatters';
 import { buttonStyle } from '../../components/Button/Button';
 import { setLoading } from '../../redux/reducers/loadingReducer';
+import { enqueueSnackbar } from 'notistack';
 
 export const Login = () => {
     const [phoneNumber, setPhoneNumber] = useState('');
@@ -20,6 +21,18 @@ export const Login = () => {
 
     const handleLogin = async () => {
         const formattedNumber = phoneNumber.replace(/\D/g, '');
+        if(!formattedNumber) {
+            enqueueSnackbar('Debes ingresar un número de teléfono', { variant: 'error' });	
+            return;
+        }
+        if(formattedNumber.length < 10) {
+            enqueueSnackbar('El número de teléfono debe tener 10 dígitos', { variant: 'error' });	
+            return;
+        }
+        if(!password) {
+            enqueueSnackbar('Debes ingresar una contraseña', { variant: 'error' });	
+            return;
+        }
         dispatch(setLoading(true));
         const response = await login(formattedNumber, password);
         dispatch(setLoading(false));
@@ -31,7 +44,7 @@ export const Login = () => {
             navigate('/calendar');
             return;
         } 
-        else navigate('/');
+        else navigate('/userCalendar');
     }
 
     const handleNumberFormatting = (e) => {

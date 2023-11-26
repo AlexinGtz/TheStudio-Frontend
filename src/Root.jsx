@@ -60,11 +60,11 @@ export const Root = (props) => {
             return;
         }
         if(location.pathname.includes('/login') && localStorage.getItem('token')) {
-            navigate('/');
+            navigate('/userCalendar');
             return;
         }
         if(userType !== 'admin' && location.pathname.includes('/admin')) {
-            navigate('/');
+            navigate('/userCalendar');
             return;
         }
         if(userType === 'admin' && location.pathname === '/') {
@@ -73,8 +73,6 @@ export const Root = (props) => {
         }
 
     }, [navigate, location]);
-
-    console.log('Loading', loading);
 
     return (
         <>

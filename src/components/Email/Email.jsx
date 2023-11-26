@@ -52,8 +52,6 @@ export const Email = ({step, setStep, setToken}) => {
             return;
         }
 
-        console.log('res', res);
-
         setToken(res.token);
         setStep(3);
     }

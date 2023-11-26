@@ -3,6 +3,7 @@ import { getToken } from '../../localStorage';
 import { enqueueSnackbar } from 'notistack';
 
 const getApiUrl = () => {
+  return 'https://qa-api.thestudioapp.com';
   return import.meta.env.DEV ? 'http://localhost:3000' : 'https://qa-api.thestudioapp.com';
 }
 

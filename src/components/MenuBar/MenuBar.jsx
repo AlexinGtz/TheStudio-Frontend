@@ -7,7 +7,7 @@ const menuItems = [
     {
         id: 1,
         title: 'Mis Clases',
-        redirect: '/',
+        redirect: '/userCalendar',
         user: [userTypes.USER], 
         icon: 'MyClasses'
     },
