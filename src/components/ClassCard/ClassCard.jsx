@@ -2,7 +2,7 @@ import './ClassCard.css'
 import flame from '../../assets/Icons/flame_outline.svg'
 import time from '../../assets/Icons/time_outline.svg'
 import whiteCheck from '../../assets/Icons/white_check.svg'
-import teacherMaria from '../../assets/Images/TeacherMaria.png'
+import instructor from '../../assets/Images/Instructor.jpg'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
@@ -64,11 +64,11 @@ export const ClassCard = (props) => {
                 </div>
                <div className='classCardTeacherInfo'>
                     <div className='classCardTeacheImage'>
-                        <img src={teacherMaria} alt="teacher" />
+                        <img className='classCardTeacheImage' src={instructor} alt="teacher" />
                     </div>
                     <div className='classCardTeacherName'>
-                        <p><b>Por:</b></p>
-                        <p>{props.class.instructor}</p>
+                        <p><b>De:</b></p>
+                        <p>The Studio Pilates</p>
                     </div>
                </div>
                {isClassBooked && props.markBookedClasses && 

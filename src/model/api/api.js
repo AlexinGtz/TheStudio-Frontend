@@ -3,7 +3,7 @@ import { getToken } from '../../localStorage';
 import { enqueueSnackbar } from 'notistack';
 
 const getApiUrl = () => {
-  return 'https://qa-api.thestudioapp.com';
+  return 'https://prod-api.thestudioapp.com';
   return import.meta.env.DEV ? 'http://localhost:3000' : 'https://qa-api.thestudioapp.com';
 }
 
@@ -18,7 +18,8 @@ instance.interceptors.response.use((response) => response.data, (error) => {
       enqueueSnackbar(error.response.data.message || error.response.data.error, { variant: 'error' });
     }
 
-    if(error.response.data.message === 'User token not valid') {
+    if(error.response.data.message === 'Token de usuario no válido') {
+      console.log('HEre');
       localStorage.removeItem('token');
       localStorage.removeItem('userType');
       window.location.href = '/login';

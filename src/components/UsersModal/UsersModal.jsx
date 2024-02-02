@@ -61,7 +61,7 @@ export const UsersModal = ({
                         classInfo.registeredUsers.map((user) => (
                             <div className='usersModalCard' key={user}>
                                 <UserCard 
-                                    user={user.phoneNumber} 
+                                    user={user} 
                                     displayRightIcon 
                                     rightIconType='delete' 
                                     disableUserClick

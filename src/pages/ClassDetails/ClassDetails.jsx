@@ -199,10 +199,10 @@ export const ClassDetails = () => {
                 </div>
             }
             { user.userType === userTypes.ADMIN && 
-                <div className='classDetailsAdminButtons'>
-                    <Button text='Cancelar clase' buttonStyle={buttonStyle.warning} onClick={() => setShowModal(true)} />
+                <>
+                    <Button className='classDetailsAdminButtons' text='Cancelar clase' buttonStyle={buttonStyle.warning} onClick={() => setShowModal(true)} />
                     {/* <Button text='Editar' buttonStyle={buttonStyle.alternative} /> */}
-                </div>
+                </>
             }
 
             {   user.userType === userTypes.USER && !classAlreadyBooked &&

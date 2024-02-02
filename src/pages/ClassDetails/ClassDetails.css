@@ -121,7 +121,7 @@
 .classDetailsAdminButtons {
     display: flex;
     flex-direction: row;
-    width: 90%;
+    width: 85%;
 }
 
 .classDetailsRegisterButton {
@@ -152,5 +152,9 @@
 
     .classDetailsRegisterButton {
         width: 20%;
+    }
+
+    .classDetailsAdminButtons {
+        width: 30%;
     }
 }

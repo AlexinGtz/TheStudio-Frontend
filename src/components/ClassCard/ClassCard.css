@@ -39,6 +39,7 @@
 .classCardTeacheImage {
     display: flex;
     width: 4rem;
+    margin-right: 1rem;
 }
 
 .classCardTeacherName {

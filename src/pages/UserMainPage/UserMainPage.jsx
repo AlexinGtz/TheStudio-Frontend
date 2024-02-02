@@ -14,10 +14,12 @@ export const UserMainPage = () => {
     }, []);
 
     const handleGetClasses = async () => {
-        dispatch(setLoading(true));
-        const res = await getUserBookedClasses();
-        dispatch(setLoading(false));
-        setClasses(res.classes.sort((a, b) => a.date > b.date ? 1 : -1));
+        if(localStorage.getItem('token')) {
+            dispatch(setLoading(true));
+            const res = await getUserBookedClasses();
+            setClasses(res);
+            dispatch(setLoading(false));
+        }
     }
 
     return (
