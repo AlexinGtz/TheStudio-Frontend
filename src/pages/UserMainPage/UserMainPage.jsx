@@ -29,8 +29,8 @@ export const UserMainPage = () => {
                 <h3>Clases a las que te has inscrito</h3>
             </div>
             <div className='userMainPageClasses'>
-                {   classes.length > 0 ? 
-                    classes.map((c) => <ClassCard key={c.date} class={c} />)
+                {   classes?.classes?.length > 0 ? 
+                    classes.classes.map((c) => <ClassCard key={c.date} class={c} />)
                     : <h3>No tienes clases registradas</h3>
                 }
             </div>

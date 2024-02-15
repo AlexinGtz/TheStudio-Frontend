@@ -5,7 +5,7 @@ export const calculateUserClasses = (purchasedPackages) => {
     const today = new Date();
     purchasedPackages.forEach((p) => {
         if (new Date(p.expireDate) > today) {
-            availableClasses += p.availableClasses;
+            availableClasses += parseInt(p.availableClasses);
         }
     });
     return availableClasses;
