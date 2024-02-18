@@ -19,7 +19,6 @@ instance.interceptors.response.use((response) => response.data, (error) => {
     }
 
     if(error.response.data.message === 'Token de usuario no válido') {
-      console.log('HEre');
       localStorage.removeItem('token');
       localStorage.removeItem('userType');
       window.location.href = '/login';

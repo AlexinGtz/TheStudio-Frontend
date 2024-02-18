@@ -51,7 +51,7 @@ export const Register = () => {
             email
         });
         dispatch(setLoading(false));
-        if(!response) return enqueueSnackbar('Ha ocurrido un error al registrarse', { variant: 'error' });
+        if(!response) return;
         enqueueSnackbar('Usuario registrado correctamente', { variant: 'success' });
         navigate('/login');
     }
