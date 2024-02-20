@@ -62,7 +62,8 @@ export const ClassDetails = () => {
     const handleBookingClass = async () => {
         dispatch(setLoading(true));
         await bookClass({
-            classDate: classId
+            classDate: classId,
+            classMonth: classInfo.month
         });
         dispatch(setLoading(false));
         handleSuceedBooking();
@@ -79,6 +80,7 @@ export const ClassDetails = () => {
         dispatch(setLoading(true));
         const res = await bookClass({
             classDate: classId,
+            classMonth: classInfo.month,
             users: selectedUsers,
         });
         dispatch(setLoading(false));
