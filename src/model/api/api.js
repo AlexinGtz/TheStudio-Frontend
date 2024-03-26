@@ -4,7 +4,7 @@ import { enqueueSnackbar } from 'notistack';
 
 const getApiUrl = () => {
   return 'https://prod-api.thestudioapp.com';
-  return import.meta.env.DEV ? 'http://localhost:3000' : 'https://qa-api.thestudioapp.com';
+  //return 'http://localhost:3000';
 }
 
 const instance = axios.create({
@@ -79,13 +79,14 @@ export const getRegisteredUsers = () => {
   });
 }
 
-export const getClassInfo = (classDate) => {
+export const getClassInfo = (classMonth, classDate) => {
   return instance.get('/getClassInfo', {
     headers: {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${getToken()}`,
     },
     params: {
+      classMonth,
       classDate
     }
   });
@@ -102,9 +103,10 @@ export const bookClass = (params) => {
   });
 }
 
-export const cancelClass = (classDate, userId) => {
+export const cancelClass = (classMonth, classDate, userId) => {
   return instance.post('/cancelClass',
   {
+    classMonth, 
     classDate,
     userId: userId ?? undefined
   },

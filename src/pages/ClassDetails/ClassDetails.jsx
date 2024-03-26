@@ -54,12 +54,20 @@ export const ClassDetails = () => {
 
     const handleGetClassInformation = async () => {
         dispatch(setLoading(true));
-        const res = await getClassInfo(classId);
+        const date = new Date(classId);
+        const res = await getClassInfo((date.getMonth() + 1).toString(),classId);
         dispatch(setLoading(false));
         setClassInfo(res);
     }
 
     const handleBookingClass = async () => {
+        const classDate = new Date(classId)
+        const rightNow = new Date()
+        if((classDate.getTime() - rightNow.getTime()) < 3600000 ) {
+            enqueueSnackbar('No puedes reservar con menos de 1 hora de anticipación', 
+                { variant: 'error' });
+            return;
+        }
         dispatch(setLoading(true));
         await bookClass({
             classDate: classId,
@@ -67,11 +75,12 @@ export const ClassDetails = () => {
         });
         dispatch(setLoading(false));
         handleSuceedBooking();
+
     }
 
     const handleCancelClassConfirm = async () => {
         dispatch(setLoading(true));
-        await cancelClass(classId, userNumber ?? undefined);
+        await cancelClass(classInfo.month, classId, userNumber ?? undefined);
         dispatch(setLoading(false));
         handleSuceedBooking();
     }
