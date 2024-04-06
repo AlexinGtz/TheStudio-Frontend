@@ -3,8 +3,8 @@ import { getToken } from '../../localStorage';
 import { enqueueSnackbar } from 'notistack';
 
 const getApiUrl = () => {
-  return 'https://prod-api.thestudioapp.com';
-  //return 'http://localhost:3000';
+  //return 'https://qa-api.thestudioapp.com';
+  return 'http://localhost:3000';
 }
 
 const instance = axios.create({
@@ -267,6 +267,30 @@ export const forgotPassword = ({newPassword, token}) => {
     headers: {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
+    },
+  });
+}
+
+export const getSecureMail = (userPhoneNumber) => {
+  return instance.get(`/getUserSecureMail?userPhoneNumber=${userPhoneNumber}`,
+  {
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${getToken()}`
+    },
+  });
+}
+
+export const confirmUserMail = ({userPhoneNumber, userEmail}) => {
+  return instance.post(`/confirmUserMail`,
+  {
+    userPhoneNumber,
+    userEmail,
+  },
+  {
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${getToken()}`
     },
   });
 }

@@ -9,7 +9,7 @@ export const ForgotPassword = () => {
 
     return (
         <div className='forgotPasswordContainer'>
-            {step <= 2 && <Email step={step} setStep={setStep} setToken={setToken} />}
+            { step <= 2 && <Email step={step} setStep={setStep} setToken={setToken} />}
             { step > 2 && <UpdatePassword resetPassword token={token} />}
         </div>
     );
