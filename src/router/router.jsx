@@ -17,7 +17,8 @@ import { AssignPackage } from "../pages/AssignPackage/AssignPackage";
 import { UpdatePassword } from "../pages/UpdatePassword/UpdatePassword";
 import { EditPackage } from "../pages/EditPackage/EditPackage";
 import { StudioCalendar } from "../pages/StudioCalendar/StudioCalendar";
-import { ForgotPassword } from "../pages/ForgotPassword/ForgotPassword";
+import { SimpleForgotPassword } from "../components/SimpleForgotPassword/SimpleForgotPassword";
+// import { ForgotPassword } from "../pages/ForgotPassword/ForgotPassword";
 
 export const router = createBrowserRouter([
     {
@@ -54,7 +55,7 @@ export const router = createBrowserRouter([
           path: "/forgotPassword",
           element: (
             <>
-              <ForgotPassword />
+              <SimpleForgotPassword />
             </>
             ),
         },
