@@ -1,5 +1,4 @@
 import './SimpleForgotPassword.css'
-import { Email } from '../../components/Email/Email';
 import { useState } from 'react';
 import { Input } from '../Input/Input';
 import { Button, buttonStyle } from '../Button/Button';
@@ -10,7 +9,8 @@ import { useNavigate } from 'react-router-dom';
 export const SimpleForgotPassword = () => {
     const [step, setStep] = useState(1);
     const [inputData, setInputData] = useState('');
-    const [userPhoneNumber, setUserPhoneNumber] = useState('')
+    const [userPhoneNumber, setUserPhoneNumber] = useState('');
+    const [userToken, setUserToken] = useState('');
     const [secureMail, setSecureMail] = useState('');
     const navigate = useNavigate()
 
@@ -19,7 +19,6 @@ export const SimpleForgotPassword = () => {
     }
 
     const handleContinueClick = async () => {
-        console.log('hello', inputData);
         if(step === 1) {
             const res = await getSecureMail(inputData);
             setSecureMail(res.secureMail);
@@ -27,11 +26,11 @@ export const SimpleForgotPassword = () => {
             setInputData('');
             setStep(2);
         } else if(step === 2) {
-            console.log('HERE');
             const res = await confirmUserMail({
                 userPhoneNumber,
                 userEmail: inputData,
             });
+            setUserToken(res.token)
             setStep(3)
         }
     }
@@ -39,7 +38,7 @@ export const SimpleForgotPassword = () => {
     return (
         <div className='emailContainer'>
             { step === 1 && 
-                    <div className='emailInfoContainer'>
+                    <div className='simpleForgotPasswordInfoContainer'>
                         <h1 className='emailTitle'>Cambiar contrasenia</h1>
                         <p className='emailText'>Por seguridad, necesitamos confirmar unos datos. Favor de ingresar su numero telefonico</p>
                         <Input 
@@ -52,7 +51,7 @@ export const SimpleForgotPassword = () => {
                     </div>
             }
             { step === 2 && 
-                <div>
+                <div className='simpleForgotPasswordInfoContainer'>
                     <h1 className='emailTitle'>Cambiar contrasenia</h1>
                     <p className='emailText'>Confirme el correo electronico con el que se registro</p>
                     <p className='emailText'>{secureMail}</p>
@@ -64,12 +63,14 @@ export const SimpleForgotPassword = () => {
                         />
                 </div>
             }
-            <div className='emailButtonsContainer'>
-                <Button className='emailButton' text={'Continuar'} onClick={handleContinueClick} />
-                <Button className='emailButton' buttonStyle={buttonStyle.alternative} text='Cancelar' onClick={handleCancelClick} />
-            </div>
+            { step !== 3 &&
+                <div className='simpleForgotPasswordButtonsContainer'>
+                    <Button className='emailButton' text={'Continuar'} onClick={handleContinueClick} />
+                    <Button className='emailButton' buttonStyle={buttonStyle.alternative} text='Cancelar' onClick={handleCancelClick} />
+                </div>
+            }
             { step === 3 &&
-                <UpdatePassword resetPassword token={token} />
+                <UpdatePassword resetPassword token={userToken} />
             }
         </div>
     );
