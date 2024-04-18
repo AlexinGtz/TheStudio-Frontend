@@ -6,7 +6,7 @@ import rightArrow from '../../assets/Icons/right_arrow.svg';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { bookClass, cancelClass, getClassInfo, getUserClasses } from '../../model/api/api';
+import { bookClass, cancelClass, getClassInfo, getUserClasses, getUserProfile } from '../../model/api/api';
 import { UserCard } from '../../components/UserCard/UserCard';
 import { Button, buttonStyle } from '../../components/Button/Button';
 import { Modal } from '../../components/Modal/Modal';
@@ -15,7 +15,7 @@ import { calculateUserClasses } from '../../utils';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { restoreClasses } from '../../redux/reducers/classesReducer';
-import { replaceBookedClasses } from '../../redux/reducers/userReducer';
+import { replaceBookedClasses, restoreProfile, setProfile } from '../../redux/reducers/userReducer';
 import { UsersModal } from '../../components/UsersModal/UsersModal';
 import { enqueueSnackbar } from 'notistack';
 import { setLoading } from '../../redux/reducers/loadingReducer';
@@ -117,10 +117,13 @@ export const ClassDetails = () => {
 
     const handleSuceedBooking = async () => {
         dispatch(restoreClasses());
+        dispatch(restoreProfile());
         dispatch(setLoading(true));
         const newClasses = await getUserClasses();
+        const updatedProfile = await getUserProfile();
         dispatch(setLoading(false));
         dispatch(replaceBookedClasses(newClasses.classes));
+        dispatch(setProfile(updatedProfile));
         navigate('/calendar');
     }
 
