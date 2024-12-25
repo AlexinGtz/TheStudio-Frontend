@@ -9,14 +9,19 @@ import { setClasses } from '../../redux/reducers/classesReducer';
 import { userTypes } from '../../constants';
 import { enqueueSnackbar } from 'notistack';
 import { setLoading } from '../../redux/reducers/loadingReducer';
+import { useNavigate } from 'react-router-dom';
+import { Button, buttonStyle } from '../../components/Button/Button';
+import { restoreClassType } from '../../redux/reducers/classTypeReducer';
 
 export const StudioCalendar = () => {
     const classes = useSelector(state => state.classes);
     const user = useSelector(state => state.user);
+    const classType = useSelector(state => state.classType);
     const [calendarType, setCalendarType] = useState('month'); // ['month', 'week']
     const [selectedDate, setSelectedDate] = useState(null);
     const [filteredClasses, setFilteredClasses] = useState([]);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const today = new Date();
     today.setHours(0,0,0,0);
     const nextMonth = new Date(today.getFullYear(), today.getMonth() + 1, today.getDate());
@@ -26,6 +31,12 @@ export const StudioCalendar = () => {
             handleGetClasses();
         }
     }, []);
+
+    useEffect(() => {        
+        if(!classType.type) {
+            navigate('/class-select');
+        }
+    }, [classType]);
 
     useEffect(() => {
         if(selectedDate) {
@@ -41,14 +52,16 @@ export const StudioCalendar = () => {
     }, [classes, selectedDate]);
 
     const handleGetClasses = async () => {
-        dispatch(setLoading(true));
-        const res = await getUpcomingClasses();
-        dispatch(setLoading(false));
-        if(!res || !res.classes || res.classes.length === 0) {
-            enqueueSnackbar('No hay clases disponibles', { variant: 'error' });
-            return;
+        if(classType.type) {
+            dispatch(setLoading(true));
+            const res = await getUpcomingClasses(classType.type);
+            dispatch(setLoading(false));
+            if(!res || !res.classes || res.classes.length === 0) {
+                enqueueSnackbar('No hay clases disponibles', { variant: 'error' });
+                return;
+            }
+            dispatch(setClasses(res.classes));
         }
-        dispatch(setClasses(res.classes));
     }
 
     const handleClickDay = (value) => {
@@ -63,6 +76,13 @@ export const StudioCalendar = () => {
             setFilteredClasses(classes);
         }
     };
+
+    const handleChangeClassType = () => {
+        dispatch(setClasses([]));
+        dispatch(restoreClassType());
+        navigate('/class-select');
+
+    }
 
     const handleDayContent = ({date}) => {
         if(date.getDay() === 0 
@@ -99,6 +119,9 @@ export const StudioCalendar = () => {
 
     return (
         <div className='userMainPageContainer'>
+            <div className='userMainPageChangeClassButtons' >
+                <Button onClick={handleChangeClassType} text='Cambiar tipo de clase' />
+            </div>
             <div className='userMainPageTexts'>
                 <h1>Calendario</h1>
                 <h3>Clases disponibles en The Studio</h3>
@@ -139,7 +162,7 @@ export const StudioCalendar = () => {
             { calendarType === 'week' &&
                 <div className='userMainPageClasses'>
                 {   filteredClasses?.length > 0 ? 
-                    filteredClasses.map((c) => <ClassCard key={c.date} class={c} markBookedClasses /> )
+                    filteredClasses.map((c) => <ClassCard key={c.date_by_type} class={c} markBookedClasses /> )
                     :
                     <h3>No hay clases disponibles para ese día</h3>
                 }

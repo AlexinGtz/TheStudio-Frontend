@@ -1,14 +1,20 @@
 import { msInADay } from './constants';
 
 export const calculateUserClasses = (purchasedPackages) => {
-    let availableClasses = 0;
+    let pilatesClasses = 0;
+    let wellnessClasses = 0;
     const today = new Date();
     purchasedPackages.forEach((p) => {
-        if (new Date(p.expireDate) > today) {
-            availableClasses += parseInt(p.availableClasses);
+        if (new Date(p.expireDate) > today) {            
+            if(p.type === 'WELLNESS') wellnessClasses += parseInt(p.availableClasses);
+            else pilatesClasses += parseInt(p.availableClasses);
         }
     });
-    return availableClasses;
+    
+    return {
+        pilatesClasses,
+        wellnessClasses
+    };
 }
 
 export const daysForPackageToExpire = (packageToCalculate) => {

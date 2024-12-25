@@ -1,100 +1,160 @@
-import './AvailablePackages.css'
-import { getPackages } from '../../model/api/api';
-import { useEffect } from 'react';
-import { Button } from '../../components/Button/Button';
-import { useDispatch, useSelector } from 'react-redux';
-import { setAllPackages } from '../../redux/reducers/packagesReducer';
-import { setLoading } from '../../redux/reducers/loadingReducer';
+import "./AvailablePackages.css";
+import { getPackages } from "../../model/api/api";
+import { useEffect } from "react";
+import { Button } from "../../components/Button/Button";
+import { useDispatch, useSelector } from "react-redux";
+import { setAllPackages } from "../../redux/reducers/packagesReducer";
+import { setLoading } from "../../redux/reducers/loadingReducer";
 
 export const packageDisplayType = {
-    USER: 'user',
-    ADMIN_EDIT: 'adminEdit',
-    ADMIN_ADD: 'adminAdd'
-}
+  USER: "user",
+  ADMIN_EDIT: "adminEdit",
+  ADMIN_ADD: "adminAdd",
+};
 
 const displayTypeText = (displayType) => {
-    switch(displayType) {
-        case packageDisplayType.USER:
-            return {
-                title: 'Paquetes disponibles',
-                text: 'Si deseas adquirir un paquete, favor de contactar al personal',
-                buttonText: ''
-            };
-        case packageDisplayType.ADMIN_EDIT:
-            return {
-                title: 'Paquetes',
-                text: 'Paquetes disponibles',
-                buttonText: 'Editar Paquete'
-            };
-        case packageDisplayType.ADMIN_ADD:
-            return {
-                title: 'Asignar paquete',
-                text: '',
-                buttonText: 'Asignar'
-            };
-        default:
-            return 'Paquetes disponibles';
+  switch (displayType) {
+    case packageDisplayType.USER:
+      return {
+        title: "Paquetes disponibles",
+        text: "Si deseas adquirir un paquete, favor de contactar al personal",
+        buttonText: "",
+      };
+    case packageDisplayType.ADMIN_EDIT:
+      return {
+        title: "Paquetes",
+        text: "Paquetes disponibles",
+        buttonText: "Editar Paquete",
+      };
+    case packageDisplayType.ADMIN_ADD:
+      return {
+        title: "Asignar paquete",
+        text: "",
+        buttonText: "Asignar",
+      };
+    default:
+      return "Paquetes disponibles";
+  }
+};
+
+export const AvailablePackages = ({ displayType, onButtonClick }) => {
+  const availablePackages = useSelector((state) => state.packages);
+  const dispatch = useDispatch();
+
+  const showButtonTypes = [
+    packageDisplayType.ADMIN_ADD,
+    packageDisplayType.ADMIN_EDIT,
+  ];
+
+  // if(availablePackages.loading) {
+  //     return <Spinner />
+  // }
+
+  useEffect(() => {
+    document.title = "The Studio - Paquetes";
+    if (
+      availablePackages?.pilates.length === 0 &&
+      availablePackages?.wellness.length === 0
+    ) {
+      handleGetPackages();
     }
-}
+  }, []);
 
-export const AvailablePackages = ({displayType, onButtonClick}) => {
-    const availablePackages = useSelector(state => state.packages);
-    const dispatch = useDispatch();
-
-    const showButtonTypes = [packageDisplayType.ADMIN_ADD, packageDisplayType.ADMIN_EDIT]
-
-    // if(availablePackages.loading) {
-    //     return <Spinner />
-    // }
-
-    useEffect(() => {
-        document.title = 'The Studio - Paquetes';
-        if(availablePackages?.data.length === 0) {
-            handleGetPackages(); 
-        }
-    }, []);
-
-    const handleGetPackages = async () => {
-        dispatch(setLoading(true));
-        const response = await getPackages();
-        dispatch(setLoading(false));
-        response.packages.sort((a, b) => {
-            if (a.classQuantity < b.classQuantity) {
-                return -1;
-            } else  {
-                return 1
-            }
-        });
-        dispatch(setAllPackages(response.packages));
-    }
-
-    const {title, text, buttonText } = displayTypeText(displayType);
-
-    return (
-        <div className='availablePackagesContainer'>
-            <h3>{title}</h3>
-            <p>{text}</p>
-            <div className='packagesAvailable'>
-                {availablePackages?.data?.length > 0 &&
-                    availablePackages.data.map((packageAvailable) => {
-                    return (
-                        <div className='packageAvailable' key={packageAvailable.classQuantity}>
-                            <h2>{packageAvailable.classQuantity} {packageAvailable.classQuantity > 1 ? 'Clases' : 'Clase'}</h2>
-                            <p>${packageAvailable.cost}</p>
-                            <p className='packageExpire'>Vigencia de {packageAvailable.expireDays} días</p>
-                            {showButtonTypes.includes(displayType)  && 
-                                <>
-                                    <Button 
-                                        className='availablePackagesButton' 
-                                        text={buttonText} 
-                                        onClick={() => onButtonClick(packageAvailable)} 
-                                        />
-                                </>
-                            }
-                        </div>
-                    )
-                })}
-            </div>
-        </div>
+  const handleGetPackages = async () => {
+    dispatch(setLoading(true));
+    const response = await getPackages();
+    dispatch(setLoading(false));
+    response.packages.sort((a, b) => {
+      if (a.classQuantity < b.classQuantity) {
+        return -1;
+      } else {
+        return 1;
+      }
+    });
+    const pilatesClasses = response.packages.filter(
+      (p) => p.classType === "PILATES"
     );
-}
+    const wellnessClasses = response.packages.filter(
+      (p) => p.classType === "WELLNESS"
+    );
+    dispatch(
+      setAllPackages({
+        pilates: pilatesClasses,
+        wellness: wellnessClasses,
+      })
+    );
+  };
+
+  const { title, text, buttonText } = displayTypeText(displayType);
+
+  return (
+    <div className="availablePackagesContainer">
+      <h3>{title}</h3>
+      <p>{text}</p>
+      <div className="packagesAvailable">
+        <div className="packagesAvailableContainer">
+          <div className="packagesAvailableColumn">
+            {availablePackages?.pilates?.length > 0 && <h1>Pilates</h1>}
+            {availablePackages?.pilates?.length > 0 &&
+              availablePackages.pilates.map((packageAvailable) => {
+                return (
+                  <div
+                    className="packageAvailable"
+                    key={packageAvailable.classQuantity}
+                  >
+                    <h2>
+                      {packageAvailable.classQuantity}{" "}
+                      {packageAvailable.classQuantity > 1 ? "Clases" : "Clase"}
+                    </h2>
+                    <p>${packageAvailable.cost}</p>
+                    <p className="packageExpire">
+                      Vigencia de {packageAvailable.expireDays} días
+                    </p>
+                    {showButtonTypes.includes(displayType) && (
+                      <>
+                        <Button
+                          className="availablePackagesButton"
+                          text={buttonText}
+                          onClick={() => onButtonClick(packageAvailable)}
+                        />
+                      </>
+                    )}
+                  </div>
+                );
+              })}
+          </div>
+          <div className="packagesAvailableColumn">
+            {availablePackages?.wellness?.length > 0 && <h1>Wellness</h1>}
+            {availablePackages?.wellness?.length > 0 &&
+              availablePackages.wellness.map((packageAvailable) => {
+                return (
+                  <div
+                    className="packageAvailable"
+                    key={packageAvailable.classQuantity}
+                  >
+                    <h2>
+                      {packageAvailable.classQuantity}{" "}
+                      {packageAvailable.classQuantity > 1 ? "Clases" : "Clase"}
+                    </h2>
+                    <p>${packageAvailable.cost}</p>
+                    <p className="packageExpire">
+                      Vigencia de {packageAvailable.expireDays} días
+                    </p>
+                    {showButtonTypes.includes(displayType) && (
+                      <>
+                        <Button
+                          className="availablePackagesButton"
+                          text={buttonText}
+                          onClick={() => onButtonClick(packageAvailable)}
+                        />
+                      </>
+                    )}
+                  </div>
+                );
+              })}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};

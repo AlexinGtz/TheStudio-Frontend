@@ -18,6 +18,7 @@ import { UpdatePassword } from "../pages/UpdatePassword/UpdatePassword";
 import { EditPackage } from "../pages/EditPackage/EditPackage";
 import { StudioCalendar } from "../pages/StudioCalendar/StudioCalendar";
 import { SimpleForgotPassword } from "../components/SimpleForgotPassword/SimpleForgotPassword";
+import { ClassSelect } from "../pages/ClassSelect/ClassSelect";
 // import { ForgotPassword } from "../pages/ForgotPassword/ForgotPassword";
 
 export const router = createBrowserRouter([
@@ -90,6 +91,14 @@ export const router = createBrowserRouter([
                     <StudioCalendar />
                 </>
                 ),
+            },
+            {
+                path: "/class-select",
+                element: (
+                  <>
+                      <ClassSelect />
+                  </>
+                  ),
             },
             {
               path: "/packages",

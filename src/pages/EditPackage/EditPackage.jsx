@@ -18,7 +18,13 @@ export const EditPackage = () => {
     const { packageId } = useParams();
 
     useEffect(() => {
-        setSelectedPackage(allPackages.data.find(p => p.id === packageId));
+        let foundPackage = allPackages.pilates.find(p => p.id === packageId);
+
+        if(!foundPackage) {
+            foundPackage = allPackages.wellness.find(p => p.id === packageId);
+        }
+        
+        setSelectedPackage(foundPackage);
     }, [allPackages]);
 
     if(!selectedPackage) return <h1>Cargando...</h1>

@@ -15,14 +15,14 @@ export const ClassCard = (props) => {
 
     const userBookedClasses = useSelector((state) => state.user.bookedClasses);
     
-    const classDate = new Date(props.class.date);
+    const classDate = new Date(props.class.date_by_type.split('#')[0]);
 
     useEffect(() => {
-        setIsClassBooked(userBookedClasses?.find((c) => c.sk === props.class.date));
+        setIsClassBooked(userBookedClasses?.find((c) => c.sk === props.class.date_by_type));
     }, [userBookedClasses]);
 
     const handleClassClick = () => {
-        navigate(`/class/${props.class.date}`);
+        navigate(`/class/${props.class.date_by_type}`);
     }
 
     let classDateString = (classDate.toLocaleDateString('es-MX', {

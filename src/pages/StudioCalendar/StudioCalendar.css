@@ -119,6 +119,11 @@
     margin: 1rem 0;
 }
 
+.userMainPageChangeClassButtons {
+    width: 30%;
+    margin-top: 2rem;
+}
+
 @media screen and (min-width: 1200px) {
     .calendarContainer {
         width: 40%;

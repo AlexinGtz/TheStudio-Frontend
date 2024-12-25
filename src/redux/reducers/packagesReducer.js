@@ -2,7 +2,8 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
     loading: false,
-    data: [],
+    pilates: [],
+    wellness: [],
 }
 
 const packagesSlice = createSlice({
@@ -10,7 +11,7 @@ const packagesSlice = createSlice({
     initialState: initialState,
     reducers: {
         setAllPackages: (_, action) => {
-            const newState = { loading: false, data: action.payload };
+            const newState = { loading: false, pilates: action.payload.pilates, wellness: action.payload.wellness };
             return newState;
         },
         restorePackages: () => {

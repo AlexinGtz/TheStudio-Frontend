@@ -5,8 +5,7 @@ export const Logo = (props) => {
 
     return (
         <div className={`Logo ${logoClass}`}>
-            <h1>The Studio</h1>
-            <h2>Pilates</h2>
+            <h1>MOVE</h1>
         </div>
     );
 }

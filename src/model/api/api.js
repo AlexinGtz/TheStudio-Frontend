@@ -52,8 +52,8 @@ export const getPackages = () => {
   });
 }
 
-export const getUpcomingClasses = () => {
-  return instance.get('/getUpcomingClasses', {
+export const getUpcomingClasses = (classType) => {
+  return instance.get(`/getUpcomingClasses?type=${classType}`, {
     headers: {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${getToken()}`
@@ -79,7 +79,7 @@ export const getRegisteredUsers = () => {
   });
 }
 
-export const getClassInfo = (classMonth, classDate) => {
+export const getClassInfo = (classMonth, classDateByType) => {
   return instance.get('/getClassInfo', {
     headers: {
       'Content-Type': 'application/json',
@@ -87,7 +87,7 @@ export const getClassInfo = (classMonth, classDate) => {
     },
     params: {
       classMonth,
-      classDate
+      classDateByType
     }
   });
 }
@@ -103,11 +103,11 @@ export const bookClass = (params) => {
   });
 }
 
-export const cancelClass = (classMonth, classDate, userId) => {
+export const cancelClass = (classMonth, classDateByType, userId) => {
   return instance.post('/cancelClass',
   {
     classMonth, 
-    classDate,
+    classDateByType,
     userId: userId ?? undefined
   },
   {

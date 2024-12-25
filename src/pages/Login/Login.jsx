@@ -78,12 +78,16 @@ export const Login = () => {
                     id='phoneNumber'
                     value={formattedPhoneNumber}
                     maxLength={14}
-                    onChange={handleNumberFormatting} />
+                    onChange={handleNumberFormatting} 
+                    onKeyPress={(e) => { if(e.key === 'Enter') handleLogin() }}
+                    />
                 <PasswordInput 
                     placeholder='Contraseña' 
                     id='password'
                     value={password} 
-                    onChange={(e) => { setPassword(e.target.value) }} />
+                    onChange={(e) => { setPassword(e.target.value) }} 
+                    onKeyPress={(e) => { if(e.key === 'Enter') handleLogin() }}
+                    />
                 <p className='loginForgotPassword' onClick={handleForgotPassword}>Olvidé mi contraseña</p>
                 <Button text='Iniciar sesión' onClick={handleLogin} />
                 <Button text='Registrarme' onClick={handleRegister} buttonStyle={buttonStyle.alternative} />

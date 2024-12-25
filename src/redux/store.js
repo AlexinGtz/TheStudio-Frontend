@@ -5,6 +5,7 @@ import classesReducer from './reducers/classesReducer'
 import packagesReducer from './reducers/packagesReducer'
 import registeredUsersReducer from './reducers/registeredUsersReducer'
 import loadingReducer from './reducers/loadingReducer'
+import classTypeReducer from './reducers/classTypeReducer'
 
 
 export const store = configureStore({
@@ -14,6 +15,7 @@ export const store = configureStore({
     classes: classesReducer,
     packages: packagesReducer,
     registeredUsers: registeredUsersReducer,
-    loading: loadingReducer
+    loading: loadingReducer,
+    classType: classTypeReducer
   }
 })

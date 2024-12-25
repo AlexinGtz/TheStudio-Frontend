@@ -13,8 +13,6 @@ export const UserCard = ({user, rightIconType, displayRightIcon, disableUserClic
         }
     }
 
-    console.log('user', user);
-
     return (
         <div className='userCard'>
             <div className='userCardClickable' onClick={handleCardClick}>

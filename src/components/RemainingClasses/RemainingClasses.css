@@ -3,6 +3,14 @@
     background-color: white;
     margin: 1rem;
     border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.remainingClassesHeader {
+    font-weight: bold;
+    margin-left: 1rem;
 }
 
 .remainingClassesBalance {
