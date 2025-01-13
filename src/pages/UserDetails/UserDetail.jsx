@@ -6,11 +6,13 @@ import { getUserInfo } from '../../model/api/api';
 import { formatPhoneNumber } from '../../formatters';
 import { RemainingClasses } from '../../components/RemainingClasses/RemainingClasses';
 import { PackageExpiration } from '../../components/PackageExpiration/PackageExpiration';
-import { Button } from '../../components/Button/Button';
+import { Button, buttonStyle } from '../../components/Button/Button';
 import { useNavigate } from 'react-router-dom';
 import { Spinner } from '../../components/Spinner/Spinner';
 import { setLoading } from '../../redux/reducers/loadingReducer';
 import { useDispatch } from 'react-redux';
+import { removeTrialClass } from '../../model/api/api';
+import { enqueueSnackbar } from 'notistack';
 
 export const UserDetails = () => {
     const { userPhoneNumber } = useParams();
@@ -29,7 +31,17 @@ export const UserDetails = () => {
         setUserInfo(userInfo);
     }
 
-    if(!userInfo) return <Spinner />;
+    if(!userInfo) return <Spinner />;    
+
+    const onRemoveTrialButtonClicked = async () => {        
+        const res = await removeTrialClass(userInfo.phoneNumber);
+        if(res?.statusCode !== 200) {
+            enqueueSnackbar('Error eliminando clase de prueba', { variant: 'error' });
+            return;
+        }
+        handleGetUserInfo(userInfo.phoneNumber);
+        enqueueSnackbar('Clase de prueba eliminada', { variant: 'success' });
+    }
 
     const currentPackage = userInfo?.purchasedPackages?.find(p => p.availableClasses > 0);
 
@@ -53,6 +65,9 @@ export const UserDetails = () => {
             </div>
             {userInfo?.purchasedPackages?.length > 0 &&<RemainingClasses packages={userInfo.purchasedPackages} />}
             {currentPackage > 0 && <PackageExpiration purchasedPachage={currentPackage} admin />}
+            { userInfo.trialClassAvailable && 
+                <Button text='Eliminar Clase de Prueba' className='userDetailsAssignButton' onClick={onRemoveTrialButtonClicked} buttonStyle={buttonStyle.warning} />
+            }
             <Button text='Asignar Paquete' className='userDetailsAssignButton' onClick={() => navigate(`/assignPackage/${userInfo.phoneNumber}`)} />
         </div>
     );

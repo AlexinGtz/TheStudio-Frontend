@@ -4,6 +4,7 @@ const initialState = {
     loading: false,
     pilates: [],
     wellness: [],
+    combined: []
 }
 
 const packagesSlice = createSlice({
@@ -11,7 +12,7 @@ const packagesSlice = createSlice({
     initialState: initialState,
     reducers: {
         setAllPackages: (_, action) => {
-            const newState = { loading: false, pilates: action.payload.pilates, wellness: action.payload.wellness };
+            const newState = { loading: false, pilates: action.payload.pilates, wellness: action.payload.wellness, combined: action.payload.combined };
             return newState;
         },
         restorePackages: () => {

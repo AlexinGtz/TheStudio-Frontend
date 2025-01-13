@@ -294,3 +294,16 @@ export const confirmUserMail = ({userPhoneNumber, userEmail}) => {
     },
   });
 }
+
+export const removeTrialClass = (phoneNumber) => {  
+  return instance.post(`/removeTrialClass`,
+  {
+    phoneNumber,
+  },
+  {
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${getToken()}`
+    },
+  });
+}

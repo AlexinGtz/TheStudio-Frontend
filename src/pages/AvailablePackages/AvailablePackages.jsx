@@ -24,7 +24,7 @@ const displayTypeText = (displayType) => {
       return {
         title: "Paquetes",
         text: "Paquetes disponibles",
-        buttonText: "Editar Paquete",
+        buttonText: "Editar",
       };
     case packageDisplayType.ADMIN_ADD:
       return {
@@ -77,10 +77,14 @@ export const AvailablePackages = ({ displayType, onButtonClick }) => {
     const wellnessClasses = response.packages.filter(
       (p) => p.classType === "WELLNESS"
     );
+    const combinedClasses = response.packages.filter(
+      (p) => p.classType === "COMBINED"
+    );
     dispatch(
       setAllPackages({
         pilates: pilatesClasses,
         wellness: wellnessClasses,
+        combined: combinedClasses,
       })
     );
   };
@@ -108,7 +112,7 @@ export const AvailablePackages = ({ displayType, onButtonClick }) => {
                     </h2>
                     <p>${packageAvailable.cost}</p>
                     <p className="packageExpire">
-                      Vigencia de {packageAvailable.expireDays} días
+                      Caduca en {packageAvailable.expireDays} días
                     </p>
                     {showButtonTypes.includes(displayType) && (
                       <>
@@ -138,7 +142,7 @@ export const AvailablePackages = ({ displayType, onButtonClick }) => {
                     </h2>
                     <p>${packageAvailable.cost}</p>
                     <p className="packageExpire">
-                      Vigencia de {packageAvailable.expireDays} días
+                      Caduca en {packageAvailable.expireDays} días
                     </p>
                     {showButtonTypes.includes(displayType) && (
                       <>
@@ -154,6 +158,36 @@ export const AvailablePackages = ({ displayType, onButtonClick }) => {
               })}
           </div>
         </div>
+        <div className="packagesAvailableColumn">
+            {availablePackages?.combined?.length > 0 && <h1>Combinados</h1>}
+            {availablePackages?.combined?.length > 0 &&
+              availablePackages.combined.map((packageAvailable) => {
+                return (
+                  <div
+                    className="packageAvailable"
+                    key={packageAvailable.classQuantity}
+                  >
+                    <h2>
+                      {packageAvailable.classQuantity}{" "}
+                      {packageAvailable.classQuantity > 1 ? "Clases" : "Clase"}
+                    </h2>
+                    <p>${packageAvailable.cost}</p>
+                    <p className="packageExpire">
+                      Caduca en {packageAvailable.expireDays} días
+                    </p>
+                    {showButtonTypes.includes(displayType) && (
+                      <>
+                        <Button
+                          className="availablePackagesButton"
+                          text={buttonText}
+                          onClick={() => onButtonClick(packageAvailable)}
+                        />
+                      </>
+                    )}
+                  </div>
+                );
+              })}
+          </div>
       </div>
     </div>
   );

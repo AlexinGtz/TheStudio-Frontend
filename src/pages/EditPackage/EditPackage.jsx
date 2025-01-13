@@ -18,11 +18,9 @@ export const EditPackage = () => {
     const { packageId } = useParams();
 
     useEffect(() => {
-        let foundPackage = allPackages.pilates.find(p => p.id === packageId);
+        const packages = allPackages.pilates.concat(allPackages.wellness, allPackages.combined);        
 
-        if(!foundPackage) {
-            foundPackage = allPackages.wellness.find(p => p.id === packageId);
-        }
+        const foundPackage = packages.find(p => p.id === packageId);
         
         setSelectedPackage(foundPackage);
     }, [allPackages]);
