@@ -23,7 +23,6 @@ import { setLoading } from '../../redux/reducers/loadingReducer';
 export const ClassDetails = () => {
     const classes = useSelector((state) => state.classes);
     const user = useSelector((state) => state.user);
-    const classType = useSelector((state) => state.classType);
     
     const [classInfo, setClassInfo] = useState(null);
     const [showModal, setShowModal] = useState(false);
@@ -35,12 +34,12 @@ export const ClassDetails = () => {
     const [showAllUsersModal, setShowAllUsersModal] = useState(false);
     const [showDeleteUserFromClassModal, setShowDeleteUserFromClassModal] = useState(false);
     const [classAlreadyBooked, setClassAlreadyBooked] = useState(false); 
-    const {classId} = useParams();
+    const { classId, classType } = useParams();
     const navigate = useNavigate();
-    const dispatch = useDispatch();    
+    const dispatch = useDispatch();        
 
     useEffect(() => {
-        const classInfo = classes?.find((c) => c.date_by_type === `${classId}#${classType.type}`);
+        const classInfo = classes?.find((c) => c.date_by_type === `${classId}#${classType}`);        
         if (!classInfo) {
             handleGetClassInformation();
             return;
@@ -56,7 +55,7 @@ export const ClassDetails = () => {
     const handleGetClassInformation = async () => {
         dispatch(setLoading(true));
         const date = new Date(classId);
-        const res = await getClassInfo((date.getMonth() + 1).toString(), `${classId}#${classType.type}`);
+        const res = await getClassInfo((date.getMonth() + 1).toString(), `${classId}#${classType}`);
         dispatch(setLoading(false));
         setClassInfo(res);
     }
@@ -71,7 +70,7 @@ export const ClassDetails = () => {
         }
         dispatch(setLoading(true));
         await bookClass({
-            classDateByType: `${classId}#${classType.type}`,
+            classDateByType: `${classId}#${classType}`,
             classMonth: classInfo.month
         });
         dispatch(setLoading(false));
@@ -81,7 +80,7 @@ export const ClassDetails = () => {
 
     const handleCancelClassConfirm = async () => {
         dispatch(setLoading(true));
-        await cancelClass(classInfo.month, `${classId}#${classType.type}`, userNumber ?? undefined);
+        await cancelClass(classInfo.month, `${classId}#${classType}`, userNumber ?? undefined);
         dispatch(setLoading(false));
         handleSuceedBooking();
     }
@@ -89,7 +88,7 @@ export const ClassDetails = () => {
     const handleBookClassForUsers = async () => {
         dispatch(setLoading(true));
         const res = await bookClass({
-            classDate: `${classId}#${classType.type}`,
+            classDate: `${classId}#${classType}`,
             classMonth: classInfo.month,
             users: selectedUsers,
         });
@@ -160,6 +159,9 @@ export const ClassDetails = () => {
         minute: '2-digit',
         hour12: true,
     });
+
+    console.log('classInfo', classInfo);
+    
 
     return (
         <div className='classDetailsContainer'>
@@ -291,7 +293,7 @@ export const ClassDetails = () => {
                 title='Inscribirme' 
                 confirmText='Aceptar' 
                 closeText='Cancelar' 
-                content={`Usarás una de tus clases a favor. Actualmente cuentas con ${calculateUserClasses(user.purchasedPackages)[`${classType.type.toLowerCase()}Classes`]} clases.`}
+                content={`Usarás una de tus clases a favor. Actualmente cuentas con ${calculateUserClasses(user.purchasedPackages)[`${classType.toLowerCase()}Classes`]} clases.`}
                 onConfirm={handleBookingClass}
                 onClose={() => setShowBookModal(false)}
                 show={showBookModal} />}

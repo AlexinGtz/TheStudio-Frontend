@@ -22,7 +22,7 @@ export const ClassCard = (props) => {
     }, [userBookedClasses]);
 
     const handleClassClick = () => {
-        navigate(`/class/${props.class.date_by_type}`);
+        navigate(`/class/${props.class.date_by_type.split('#')[0]}/${props.class.date_by_type.split('#')[1]}`);
     }
 
     let classDateString = (classDate.toLocaleDateString('es-MX', {

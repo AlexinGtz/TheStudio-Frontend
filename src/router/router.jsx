@@ -133,7 +133,7 @@ export const router = createBrowserRouter([
                 ),
             },
             {
-              path: "/class/:classId",
+              path: "/class/:classId/:classType",
               element: (
                 <>
                     <ClassDetails />

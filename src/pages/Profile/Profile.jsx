@@ -14,6 +14,7 @@ import { restoreClasses } from '../../redux/reducers/classesReducer';
 import { restorePackages } from '../../redux/reducers/packagesReducer';
 import { restoreProfile } from '../../redux/reducers/userReducer';
 import { restoreRegisteredUsers } from '../../redux/reducers/registeredUsersReducer';
+import { restoreClassType } from '../../redux/reducers/classTypeReducer';
 
 export const Profile = () => {
     const user = useSelector(state => state.user);
@@ -33,6 +34,7 @@ export const Profile = () => {
         dispatch(restorePackages());
         dispatch(restoreProfile());
         dispatch(restoreRegisteredUsers());
+        dispatch(restoreClassType());
         navigate('/login');
     }
 
