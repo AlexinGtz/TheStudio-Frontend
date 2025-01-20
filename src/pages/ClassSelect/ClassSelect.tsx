@@ -17,11 +17,13 @@ export const ClassSelect = () => {
     }
 
     return (
-        <div className='classSelect'>
-            <h1>Elige tu clase</h1>
-            <div className='classSelectButtons'>
-                <Button text="Pilates" onClick={handleClassSelect.bind(this, "Pilates")} />
-                <Button text="Wellness" buttonStyle={buttonStyle.alternative} onClick={handleClassSelect.bind(this, "Wellness")} />
+        <div className='classSelectContainer'>
+            <div className='classSelect'>
+                <h1>Elige tu clase</h1>
+                <div className='classSelectButtons'>
+                    <Button text="Pilates" onClick={handleClassSelect.bind(this, "Pilates")} />
+                    <Button text="Wellness" buttonStyle={buttonStyle.alternative} onClick={handleClassSelect.bind(this, "Wellness")} />
+                </div>
             </div>
         </div>
     );

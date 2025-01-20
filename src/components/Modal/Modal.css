@@ -12,9 +12,9 @@
     position: fixed;
     background-color: white;
     border-radius: 10px;
-    width: 80%;
+    width: 60%;
     height: fit-content;
-    left: 5%;
+    left: 20%;
     margin: 1rem 0 0 0;
     padding: 1rem;
     top: 30%;
@@ -30,6 +30,7 @@
 .modalContent {
     font-size: 14px;
     text-align: justify;
+    justify-self: center;
 }
 
 .modalButtons {

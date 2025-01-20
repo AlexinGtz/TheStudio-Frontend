@@ -14,7 +14,7 @@ export const Modal = ({
     if(!show) return null;
     
     return (
-        <div className='modalBackdrop'>
+        <div className='modalBackdrop' onClick={onClose}>
             <div className='modalContainer'>
                 <h2 className='modalTitle'>{title}</h2>
                 <p className='modalContent'>{content}</p>

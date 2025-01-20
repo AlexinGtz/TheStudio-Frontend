@@ -46,29 +46,31 @@ export const UsersModal = ({
 
     if(!show) return null;
 
+    let content = showAllUsers ? (
+    <>
+        <SearchBar updateFilter={setFilter} altColor />
+        <UsersList users={filteredUsers} externalUserClick={onIconClick} selectedUsers={selectedUsers} disableUserClick />
+    </>) : (<p>No users have been registered yet.</p>);    
+
+    if (!showAllUsers && classInfo?.registeredUsers) {
+        content = classInfo.registeredUsers.map((user) => (
+            <div className='usersModalCard' key={user}>
+                <UserCard 
+                    user={user} 
+                    displayRightIcon 
+                    rightIconType='delete' 
+                    disableUserClick
+                    onIconClick={onIconClick} />
+            </div>
+        ))
+    }    
+
     return (
-        <div className='usersModalBackdrop'>
+        <div className='usersModalBackdrop' onClick={onClose}>
             <div className='usersModalContainer'>
                 <h2 className='usersModalTitle'>{title}</h2>
                 <div className='userModalContent'>
-                    {   showAllUsers ?
-                        <>
-                            <SearchBar updateFilter={setFilter} altColor />
-                            <UsersList users={filteredUsers} externalUserClick={onIconClick} selectedUsers={selectedUsers} disableUserClick />
-                        </>
-                        :
-                        classInfo?.registeredUsers &&
-                        classInfo.registeredUsers.map((user) => (
-                            <div className='usersModalCard' key={user}>
-                                <UserCard 
-                                    user={user} 
-                                    displayRightIcon 
-                                    rightIconType='delete' 
-                                    disableUserClick
-                                    onIconClick={onIconClick} />
-                            </div>
-                        ))
-                    }
+                    { content }
                 </div>
                 <div className='usersModalButtons'>
                     <Button text={closeText} onClick={onClose} buttonStyle={buttonStyle.gray} />

@@ -158,10 +158,7 @@ export const ClassDetails = () => {
         hour: '2-digit',
         minute: '2-digit',
         hour12: true,
-    });
-
-    console.log('classInfo', classInfo);
-    
+    });    
 
     return (
         <div className='classDetailsContainer'>
