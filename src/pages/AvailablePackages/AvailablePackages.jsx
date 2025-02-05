@@ -5,12 +5,7 @@ import { Button } from "../../components/Button/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { setAllPackages } from "../../redux/reducers/packagesReducer";
 import { setLoading } from "../../redux/reducers/loadingReducer";
-
-export const packageDisplayType = {
-  USER: "user",
-  ADMIN_EDIT: "adminEdit",
-  ADMIN_ADD: "adminAdd",
-};
+import { packageDisplayType } from '../../constants';	
 
 const displayTypeText = (displayType) => {
   switch (displayType) {
@@ -51,7 +46,7 @@ export const AvailablePackages = ({ displayType, onButtonClick }) => {
   // }\
 
   const orderPackages = (a, b) => {
-    if (a.classQuantity < b.classQuantity) {
+    if (parseInt(a.classQuantity) < parseInt(b.classQuantity)) {
       return -1;
     } else {
       return 1;
@@ -86,11 +81,12 @@ export const AvailablePackages = ({ displayType, onButtonClick }) => {
     );
     const combinedClasses = response.packages.filter(
       (p) => p.classType === "COMBINED"
-    );
-
+    );    
+    
     wellnessClasses.sort(orderPackages);
     pilatesClasses.sort(orderPackages);
     combinedClasses.sort(orderPackages);
+    
     dispatch(
       setAllPackages({
         pilates: pilatesClasses,

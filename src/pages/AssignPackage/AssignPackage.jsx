@@ -1,4 +1,4 @@
-import { AvailablePackages, packageDisplayType } from '../AvailablePackages/AvailablePackages';
+import { AvailablePackages } from '../AvailablePackages/AvailablePackages';
 import './AssignPackage.css'
 import { useState } from 'react';
 import { Modal } from '../../components/Modal/Modal';
@@ -7,6 +7,7 @@ import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { setLoading } from '../../redux/reducers/loadingReducer';
+import { packageDisplayType } from '../../constants';	
 
 export const AssignPackage = () => {
     const registeredUsers = useSelector(state => state.registeredUsers.users);

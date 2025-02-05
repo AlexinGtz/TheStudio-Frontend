@@ -1,6 +1,7 @@
 import './PackagesAdmin.css'
-import {AvailablePackages, packageDisplayType} from '../AvailablePackages/AvailablePackages'
+import { AvailablePackages } from '../AvailablePackages/AvailablePackages'
 import { useNavigate } from 'react-router-dom';
+import { packageDisplayType } from '../../constants';	
 
 export const PackagesAdmin = () => {
     const navigate = useNavigate();

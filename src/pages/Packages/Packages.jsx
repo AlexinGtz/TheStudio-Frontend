@@ -5,7 +5,8 @@ import { selectEarliestPackage } from '../../utils';
 import { ExtraPackages } from '../../components/ExtraPacakges/ExtraPackages';
 import { RemainingClasses } from '../../components/RemainingClasses/RemainingClasses';
 import { PackageExpiration } from '../../components/PackageExpiration/PackageExpiration';
-import { AvailablePackages, packageDisplayType } from '../AvailablePackages/AvailablePackages';
+import { AvailablePackages } from '../AvailablePackages/AvailablePackages';
+import { packageDisplayType } from '../../constants';	
 
 export const Packages = () => {
     const purchasedPackages = useSelector(state => state.user.purchasedPackages);
