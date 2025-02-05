@@ -15,7 +15,9 @@ export const ClassCard = (props) => {
 
     const userBookedClasses = useSelector((state) => state.user.bookedClasses);
     
-    const classDate = new Date(props.class.date_by_type.split('#')[0]);
+    const [classDateString, classType] = props.class.date_by_type.split('#');
+
+    const classDate = new Date(classDateString);
 
     useEffect(() => {
         setIsClassBooked(userBookedClasses?.find((c) => c.sk === props.class.date_by_type));
@@ -25,14 +27,14 @@ export const ClassCard = (props) => {
         navigate(`/class/${props.class.date_by_type.split('#')[0]}/${props.class.date_by_type.split('#')[1]}`);
     }
 
-    let classDateString = (classDate.toLocaleDateString('es-MX', {
+    let classDateText = (classDate.toLocaleDateString('es-MX', {
         weekday: 'long',
         year: 'numeric',
         month: 'long',
         day: 'numeric',
     }));
 
-    classDateString = classDateString.replace(/^./, classDateString[0].toUpperCase());
+    classDateText = classDateText.replace(/^./, classDateText[0].toUpperCase());
 
     const startHour = classDate.toLocaleTimeString('es-MX', {
         hour: '2-digit',
@@ -50,7 +52,7 @@ export const ClassCard = (props) => {
 
     return (
         <div className='classCardContainer' onClick={handleClassClick}>
-            <h3 className='classCardDate'>{classDateString}</h3>
+            <h3 className='classCardDate'>{classDateText}</h3>
             <div className='classCardInfo'>
                 <div className='classCardHour'>
                     <div className='classCardTime'>
@@ -68,7 +70,7 @@ export const ClassCard = (props) => {
                     </div>
                     <div className='classCardTeacherName'>
                         <p><b>De:</b></p>
-                        <p>The Studio Pilates</p>
+                        <p>{classType}</p>
                     </div>
                </div>
                {isClassBooked && props.markBookedClasses && 

@@ -18,7 +18,7 @@ export const Users = () => {
         if(!registeredUsers || registeredUsers.length === 0) {
             handleGetUsers();        
         }
-    }, []);
+    }, [registeredUsers]);
 
     const handleGetUsers = async () => {
         dispatch(setLoading(true));

@@ -13,10 +13,6 @@ export const Packages = () => {
     const [filteredPackages, setFilteredPackages] = useState([]);
 
     useEffect(() => {
-        document.title = 'The Studio - Paquetes';
-    }, []);
-
-    useEffect(() => {
         setEarliestPackage(selectEarliestPackage(purchasedPackages));
     }, [purchasedPackages]);
 

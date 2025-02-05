@@ -124,7 +124,7 @@ export const StudioCalendar = () => {
             </div>
             <div className='userMainPageTexts'>
                 <h1>Calendario</h1>
-                <h3>Clases disponibles en The Studio</h3>
+                <h3>Clases disponibles en MOVE</h3>
             </div>
             <div>
                 <select onChange={handleSelectChange} value={calendarType} className='calendarSelect'>

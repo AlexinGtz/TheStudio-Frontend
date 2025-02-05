@@ -5,6 +5,10 @@ import { SearchBar } from '../SearchBar/SearchBar';
 import { UsersList } from '../UsersList/UsersList';
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { setRegisteredUsers } from '../../redux/reducers/registeredUsersReducer';
+import { setLoading } from '../../redux/reducers/loadingReducer';
+import { useDispatch } from 'react-redux';
+import { getRegisteredUsers } from '../../model/api/api';
 
 export const UsersModal = ({
     title,
@@ -22,6 +26,23 @@ export const UsersModal = ({
     const [filter, setFilter] = useState('');
     const [filteredUsers, setFilteredUsers] = useState([]);
     const registeredUsers = useSelector(state => state.registeredUsers.users);
+    const dispatch = useDispatch();
+
+    const handleGetUsers = async () => {
+            dispatch(setLoading(true));
+            const res = await getRegisteredUsers();
+            dispatch(setLoading(false));
+            dispatch(setRegisteredUsers({ 
+                users: res.users,
+                lastEvaluatedKey: res.lastEvaluatedKey,
+            }));
+    }
+
+    useEffect(() => {
+        if(!registeredUsers || registeredUsers.length === 0) {
+            handleGetUsers();        
+        }
+    }, [registeredUsers]);
 
     useEffect(() => {
         let filteredUsers = registeredUsers.filter(user => {
@@ -66,7 +87,7 @@ export const UsersModal = ({
     }    
 
     return (
-        <div className='usersModalBackdrop' onClick={onClose}>
+        <div className='usersModalBackdrop' onClick={() => {}}>
             <div className='usersModalContainer'>
                 <h2 className='usersModalTitle'>{title}</h2>
                 <div className='userModalContent'>

@@ -88,7 +88,7 @@ export const ClassDetails = () => {
     const handleBookClassForUsers = async () => {
         dispatch(setLoading(true));
         const res = await bookClass({
-            classDate: `${classId}#${classType}`,
+            classDateByType: `${classId}#${classType}`,
             classMonth: classInfo.month,
             users: selectedUsers,
         });

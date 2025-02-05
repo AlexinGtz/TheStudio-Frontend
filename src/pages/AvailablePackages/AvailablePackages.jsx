@@ -48,10 +48,17 @@ export const AvailablePackages = ({ displayType, onButtonClick }) => {
 
   // if(availablePackages.loading) {
   //     return <Spinner />
-  // }
+  // }\
+
+  const orderPackages = (a, b) => {
+    if (a.classQuantity < b.classQuantity) {
+      return -1;
+    } else {
+      return 1;
+    }
+  };
 
   useEffect(() => {
-    document.title = "The Studio - Paquetes";
     if (
       availablePackages?.pilates.length === 0 &&
       availablePackages?.wellness.length === 0
@@ -80,6 +87,10 @@ export const AvailablePackages = ({ displayType, onButtonClick }) => {
     const combinedClasses = response.packages.filter(
       (p) => p.classType === "COMBINED"
     );
+
+    wellnessClasses.sort(orderPackages);
+    pilatesClasses.sort(orderPackages);
+    combinedClasses.sort(orderPackages);
     dispatch(
       setAllPackages({
         pilates: pilatesClasses,
