@@ -98,7 +98,6 @@ export const ClassDetails = () => {
             enqueueSnackbar('Clase reservada correctamente', { variant: 'success' });
             return;
         }
-        enqueueSnackbar('Error al reservar la clase', { variant: 'error' });
     }
 
     const handleDeleteIconClicked = (phoneNumber) => {
