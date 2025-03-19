@@ -29,6 +29,8 @@ export const EditPackage = () => {
 
     const handleSaveChanges = async () => {
         selectedPackage.cost = parseInt(selectedPackage.cost);
+        selectedPackage.classQuantity = parseInt(selectedPackage.classQuantity);
+        selectedPackage.expireDays = parseInt(selectedPackage.expireDays);
         dispatch(setLoading(true));
         const res = await editPackageInfo(selectedPackage);
         dispatch(setLoading(false));
