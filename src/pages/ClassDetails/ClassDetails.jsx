@@ -243,7 +243,7 @@ export const ClassDetails = () => {
                 title='¿Deseas cancelar la inscripcion?' 
                 confirmText='Sí, cancelar' 
                 closeText='No' 
-                content='Perderás el lugar a la clase y si son menos de 24 horas, perderás la clase a favor.'
+                content='Perderás el lugar a la clase y si son menos de 12 horas, perderás la clase a favor.'
                 onConfirm={handleCancelClassConfirm}
                 onClose={() => setShowCancelModal(false)}
                 show={showCancelModal} />
