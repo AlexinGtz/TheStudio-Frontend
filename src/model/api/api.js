@@ -3,7 +3,7 @@ import { getToken } from '../../localStorage';
 import { enqueueSnackbar } from 'notistack';
 
 const getApiUrl = () => {
-  return 'https://prod-api.thestudioapp.com';
+  return 'https://7611nxhocb.execute-api.us-east-2.amazonaws.com';
   //return 'http://localhost:3000';
 }
 
